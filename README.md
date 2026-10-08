@@ -23,7 +23,7 @@ Le dossier `site/` est publié par le workflow `.github/workflows/pages.yml` à 
 
 Pour activer la publication : dans les réglages du dépôt, rubrique **Pages**, choisir **GitHub Actions** comme source. Sur un dépôt privé, GitHub Pages demande un compte GitHub Pro, Team ou Enterprise.
 
-Le dossier `site/models/` contient les deux modèles de visage (`det_500m.onnx` et `w600k_mbf.onnx`). Il n'est pas versionné dans l'état actuel, voir [docs/DECISIONS.md](docs/DECISIONS.md), D-033.
+Le dossier `site/models/` contient les deux modèles de visage (`det_500m.onnx` et `w600k_mbf.onnx`), versionnés pour que le site fonctionne en ligne. Ils sont réservés à la recherche non commerciale, voir [docs/DECISIONS.md](docs/DECISIONS.md), D-033.
 
 ## Architecture de la version web
 
@@ -35,7 +35,7 @@ site/
   js/coeur/                  logique pure : suivi, lissage, suggestion, validation, base, enrôlement
   js/navigateur/             caméra, moteur ONNX Runtime Web, stockage
   js/pages/                  scripts des deux pages
-  models/                    modèles de visage (non versionnés, voir D-033)
+  models/                    modèles de visage (versionnés, voir D-033)
   tests/                     tests Node (logique, parité avec InsightFace) et test de bout en bout
 ```
 

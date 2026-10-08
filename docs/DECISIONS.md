@@ -193,13 +193,13 @@ Chaque décision indique le contexte, les alternatives écartées et les raisons
 
 ---
 
-## D-033 : modèles buffalo_s dans `site/models/`, publication à trancher
+## D-033 : modèles buffalo_s dans `site/models/`, dépôt public
 
 **Contexte.** Les deux fichiers nécessaires au navigateur sont `det_500m.onnx` (2,4 Mo) et `w600k_mbf.onnx` (13 Mo), déjà téléchargés pour la version Python. Le téléchargement a été autorisé pour `buffalo_s` seulement.
 
 **Problème.** Les poids InsightFace sont réservés à la recherche non commerciale (D-021). Publier un site public les redistribuerait.
 
-**Décision provisoire.** Les fichiers sont copiés dans `site/models/`, ignoré par git. Le site ne fonctionne donc pas encore en ligne. Publier les fichiers suppose un dépôt public et l'acceptation de cette licence.
+**Décision.** Le dépôt est rendu public et les fichiers sont versionnés dans `site/models/`, pour que le site fonctionne en ligne. Choix de l'utilisateur : projet de test d'un concept, sans usage commercial ni diffusion prévue. La licence non commerciale est donc respectée, et une publication commerciale imposerait de passer aux modèles de la section suivante.
 
 **Alternative à évaluer.** YuNet (détection) et SFace (reconnaissance) du projet OpenCV Zoo sont sous licences MIT et Apache 2.0, donc publiables sans restriction. Ils n'ont pas été téléchargés, la permission n'a pas été donnée. Le changement obligerait à revalider les seuils.
 

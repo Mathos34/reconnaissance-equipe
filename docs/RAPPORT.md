@@ -16,9 +16,7 @@
 - les navigateurs autres qu'Edge et les téléphones ;
 - le respect des poses : elles sont guidées, pas contrôlées.
 
-**Bloquant avant publication :**
-- GitHub Pages n'est gratuit que pour un dépôt public. Le dépôt est privé : il faut le rendre public ou prendre GitHub Pro.
-- Les modèles InsightFace (non commerciaux, D-021) ne peuvent pas être publiés sans accord de licence. Alternative : YuNet et SFace, licences permissives (D-033).
+**Publication :** dépôt rendu public, site publié par GitHub Actions. Les modèles InsightFace (usage non commercial, D-021) sont versionnés, ce qui suppose un usage de test sans diffusion commerciale (D-033).
 
 ## Ce qui fonctionne
 

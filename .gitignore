@@ -14,7 +14,6 @@ dist/
 .ipynb_checkpoints/
 *.tmp
 
-# Site web : dépendances de test, et modèles buffalo_s (licence non commerciale, voir docs/DECISIONS.md, D-033)
+# Site web : dépendances de test (les modèles buffalo_s sont versionnés, voir docs/DECISIONS.md, D-033)
 site/node_modules/
-site/models/
 site/tests/e2e/__pycache__/
