@@ -27,7 +27,9 @@ from playwright.sync_api import expect, sync_playwright
 
 SITE = pathlib.Path(__file__).resolve().parents[2]
 PORT = int(os.environ.get("MT_PORT", "8791"))
-URL = f"http://127.0.0.1:{PORT}"
+# Par défaut : serveur local sur le dossier site/. MT_URL permet de tester le site publié.
+URL_PUBLIEE = os.environ.get("MT_URL")
+URL = URL_PUBLIEE or f"http://127.0.0.1:{PORT}"
 EDGE = os.environ.get("MT_EDGE", r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")
 TIMEOUT_CAPTURE = 240_000
 
@@ -98,11 +100,13 @@ def main() -> int:
     dossier = pathlib.Path(tempfile.mkdtemp(prefix="maison-test-e2e-"))
     sauvegarde = dossier / "sauvegarde.json"
 
-    serveur = subprocess.Popen(
-        [sys.executable, "-m", "http.server", str(PORT), "--bind", "127.0.0.1", "--directory", str(SITE)],
-        stdout=subprocess.DEVNULL,
-        stderr=subprocess.DEVNULL,
-    )
+    serveur = None
+    if not URL_PUBLIEE:
+        serveur = subprocess.Popen(
+            [sys.executable, "-m", "http.server", str(PORT), "--bind", "127.0.0.1", "--directory", str(SITE)],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
     try:
         time.sleep(1)
         with sync_playwright() as p:
@@ -134,7 +138,8 @@ def main() -> int:
             print(f"ok : visage inconnu, pas de fiche affichée ({similarite})")
             navigateur.close()
     finally:
-        serveur.terminate()
+        if serveur is not None:
+            serveur.terminate()
 
     if erreurs:
         print("erreurs navigateur :")
