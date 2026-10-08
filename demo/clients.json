@@ -1,0 +1,88 @@
+[
+  {
+    "identifiant": "C001",
+    "civilite": "Madame",
+    "prenom": "Claire",
+    "nom": "Test",
+    "conseiller": "Camille Conseil",
+    "preferences": {
+      "boisson": "café glacé",
+      "temperature": "froid",
+      "sucre": "non",
+      "lait": "lait d'amande"
+    },
+    "taille_vetement": "38",
+    "styles": ["minimaliste", "couleurs sobres"],
+    "cadeaux_notes": ["foulard soie bleu nuit"],
+    "derniers_achats": [
+      {"date": "2026-09-14", "article": "Sac cuir tilleul", "montant": 1240},
+      {"date": "2026-07-02", "article": "Carnet cuir", "montant": 85}
+    ],
+    "notes": "Aime être accueillie rapidement. Préfère les rendez-vous en fin de matinée.",
+    "prochain_rendez_vous": "2026-10-20T10:30:00"
+  },
+  {
+    "identifiant": "C002",
+    "civilite": "Monsieur",
+    "prenom": "Antoine",
+    "nom": "Démo",
+    "conseiller": "Hugo Vendeur",
+    "preferences": {
+      "boisson": "thé chaud au miel",
+      "temperature": "chaud",
+      "sucre": "non",
+      "lait": "aucun"
+    },
+    "taille_vetement": "L",
+    "styles": ["classique", "tons chauds"],
+    "cadeaux_notes": ["gants laine anthracite"],
+    "derniers_achats": [
+      {"date": "2026-08-27", "article": "Gants laine anthracite", "montant": 190}
+    ],
+    "notes": "Vient souvent le samedi. Apprécie qu'on lui présente les nouveautés une par une.",
+    "prochain_rendez_vous": null
+  },
+  {
+    "identifiant": "C003",
+    "civilite": "Madame",
+    "prenom": "Sophie",
+    "nom": "Exemple",
+    "conseiller": "Camille Conseil",
+    "preferences": {
+      "boisson": "espresso serré",
+      "temperature": "chaud",
+      "sucre": 1,
+      "lait": "aucun"
+    },
+    "taille_vetement": "40",
+    "styles": ["tailleur", "bijoux discrets"],
+    "cadeaux_notes": ["écharpe cachemire ivoire"],
+    "derniers_achats": [
+      {"date": "2026-09-30", "article": "Écharpe cachemire ivoire", "montant": 420},
+      {"date": "2026-06-18", "article": "Eau d'Ambre 50 ml", "montant": 165}
+    ],
+    "notes": "Pressée le matin. Préfère un accueil court et précis.",
+    "prochain_rendez_vous": "2026-10-15T17:00:00"
+  },
+  {
+    "identifiant": "C004",
+    "civilite": "Madame",
+    "prenom": "Léa",
+    "nom": "Fictive",
+    "conseiller": "Hugo Vendeur",
+    "preferences": {
+      "boisson": "chocolat chaud",
+      "temperature": "chaud",
+      "sucre": 2,
+      "lait": "lait d'avoine"
+    },
+    "taille_vetement": "36",
+    "styles": ["original", "couleurs vives"],
+    "cadeaux_notes": ["foulard imprimé", "bougie ambrée"],
+    "derniers_achats": [
+      {"date": "2026-10-03", "article": "Foulard imprimé", "montant": 230}
+    ],
+    "notes": "Adore les surprises. Demande souvent des conseils sur les cadeaux.",
+    "prochain_rendez_vous": "2026-11-02T14:00:00"
+  }
+]

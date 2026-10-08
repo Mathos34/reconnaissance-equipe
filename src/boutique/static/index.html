@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Maison Test : démonstration</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="bandeau">
+    <span class="marque" id="nom-boutique">Maison Test</span>
+    <span class="statut" id="statut">Connexion...</span>
+  </header>
+
+  <main class="grille">
+    <section class="carte video" aria-label="Flux caméra">
+      <img id="flux" src="/video" alt="Flux de la caméra">
+      <p class="message-camera" id="message-camera" hidden></p>
+      <p class="fps" id="fps"></p>
+    </section>
+
+    <section class="carte fiche" aria-label="Fiche client">
+      <div class="barre">
+        <button type="button" id="bascule" class="bouton">Masquer la fiche</button>
+      </div>
+
+      <div id="accueil" class="accueil">
+        <p class="petit">Bienvenue chez</p>
+        <h1 class="titre" id="titre-accueil">Maison Test</h1>
+        <p class="discret">Un instant, nous préparons votre accueil.</p>
+      </div>
+
+      <div id="fiche" class="contenu" hidden>
+        <section class="bloc identite">
+          <p class="petit" id="conseiller-attitre"></p>
+          <h1 class="titre" id="nom-complet"></h1>
+          <p class="discret" id="repere"></p>
+        </section>
+
+        <section class="bloc preferences">
+          <p class="petit">Préférences</p>
+          <p class="boisson" id="boisson"></p>
+          <dl class="grille-prefs">
+            <div><dt>Température</dt><dd id="temperature"></dd></div>
+            <div><dt>Sucre</dt><dd id="sucre"></dd></div>
+            <div><dt>Lait</dt><dd id="lait"></dd></div>
+          </dl>
+        </section>
+
+        <section class="bloc suggestion">
+          <p class="petit">Suggestion d'accueil</p>
+          <p class="accroche" id="accroche"></p>
+          <p class="discret">Sucre et lait à confirmer avec le client.</p>
+        </section>
+
+        <section class="bloc">
+          <p class="petit">Derniers achats</p>
+          <ul class="achats" id="achats"></ul>
+        </section>
+
+        <section class="bloc">
+          <p class="petit">Notes du conseiller</p>
+          <p id="notes"></p>
+        </section>
+
+        <section class="bloc">
+          <p class="petit">Prochain rendez-vous</p>
+          <p id="rdv"></p>
+        </section>
+      </div>
+
+      <div id="masquee" class="accueil" hidden>
+        <p class="discret">Fiche masquée.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

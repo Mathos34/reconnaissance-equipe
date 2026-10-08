@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "boutique"
+version = "0.1.0"
+description = "POC de reconnaissance client pour une boutique fictive (Maison Test)"
+requires-python = ">=3.10"
+dependencies = [
+    "insightface",
+    "onnxruntime",
+    "numpy",
+    "opencv-python",
+    "pillow",
+    "fastapi",
+    "uvicorn",
+]
+
+[project.optional-dependencies]
+dev = ["pytest", "httpx", "nbformat", "nbclient", "ipykernel", "matplotlib"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+boutique = ["static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

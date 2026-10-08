@@ -1,0 +1,15 @@
+# Données réelles de démo : jamais versionnées
+data/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+build/
+dist/
+.venv/
+
+# Outils
+.pytest_cache/
+.ipynb_checkpoints/
+*.tmp

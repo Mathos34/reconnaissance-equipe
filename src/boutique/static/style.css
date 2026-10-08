@@ -1,0 +1,188 @@
+/* Thème sobre : fond crème, titres en serif, beaucoup d'espace. Pensé pour 1920 x 1080. */
+:root {
+  --fond: #f4efe6;
+  --carte: #fbf8f2;
+  --encre: #2b2420;
+  --discret: #6f655c;
+  --or: #9a7b3f;
+  --filet: #e2d9c8;
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: "Segoe UI", system-ui, sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --fond: #1d1916;
+    --carte: #27211d;
+    --encre: #f1e9dc;
+    --discret: #b3a797;
+    --or: #d2b57a;
+    --filet: #3d342d;
+  }
+}
+
+:root[data-theme="dark"] {
+  --fond: #1d1916;
+  --carte: #27211d;
+  --encre: #f1e9dc;
+  --discret: #b3a797;
+  --or: #d2b57a;
+  --filet: #3d342d;
+}
+
+* { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+html { font-size: 18px; }
+
+body {
+  margin: 0;
+  background: var(--fond);
+  color: var(--encre);
+  font-family: var(--sans);
+  min-height: 100vh;
+}
+
+.bandeau {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1.5rem 3rem;
+  border-bottom: 1px solid var(--filet);
+}
+
+.marque {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  letter-spacing: 0.08em;
+}
+
+.statut { color: var(--discret); font-size: 0.95rem; }
+
+.grille {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 3rem;
+  padding: 2.5rem 3rem;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.carte {
+  background: var(--carte);
+  border: 1px solid var(--filet);
+  border-radius: 6px;
+  padding: 2rem;
+  position: relative;
+}
+
+.video img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  background: #000;
+}
+
+.message-camera {
+  color: var(--discret);
+  margin: 1rem 0 0;
+}
+
+.fps {
+  position: absolute;
+  top: 2.5rem;
+  right: 2.5rem;
+  margin: 0;
+  color: var(--discret);
+  font-size: 0.9rem;
+}
+
+.barre {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+}
+
+.bouton {
+  font: inherit;
+  font-size: 0.95rem;
+  color: var(--encre);
+  background: transparent;
+  border: 1px solid var(--or);
+  border-radius: 999px;
+  padding: 0.5rem 1.2rem;
+  cursor: pointer;
+}
+
+.bouton:hover { background: var(--or); color: var(--carte); }
+
+.petit {
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--or);
+  margin: 0 0 0.5rem;
+}
+
+.discret { color: var(--discret); margin: 0.3rem 0 0; }
+
+.titre {
+  font-family: var(--serif);
+  font-weight: normal;
+  font-size: 2.6rem;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.accueil {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.contenu > .bloc {
+  border-top: 1px solid var(--filet);
+  padding: 1.6rem 0;
+}
+
+.contenu > .bloc:first-child { border-top: none; padding-top: 0; }
+
+.boisson {
+  font-family: var(--serif);
+  font-size: 3.4rem;
+  line-height: 1.1;
+  margin: 0 0 1.2rem;
+}
+
+.grille-prefs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 0;
+}
+
+.grille-prefs dt { color: var(--discret); font-size: 0.9rem; }
+.grille-prefs dd { margin: 0.2rem 0 0; font-size: 1.25rem; }
+
+.accroche {
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.achats { list-style: none; padding: 0; margin: 0; }
+.achats li { padding: 0.5rem 0; border-bottom: 1px dotted var(--filet); }
+
+@media (max-width: 900px) {
+  html { font-size: 16px; }
+  .grille { grid-template-columns: 1fr; padding: 1.5rem 1rem; gap: 1.5rem; }
+  .bandeau { padding: 1rem; }
+  .titre { font-size: 2rem; }
+  .boisson { font-size: 2.4rem; }
+  .grille-prefs { grid-template-columns: 1fr; }
+}
