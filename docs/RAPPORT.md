@@ -2,6 +2,24 @@
 
 *Public visé : l'équipe projet et l'enseignant. État au 8 octobre 2026.*
 
+## Version web (site/)
+
+- **Application statique** : la reconnaissance tourne dans le navigateur, avec ONNX Runtime Web 1.30.0 (WebGPU si disponible, sinon WASM). Aucune photo n'est envoyée à un serveur.
+- **Parcours complet** : ajout d'un client (capture de 25 images en cinq poses ou import de photos, fiche, consentement « J'ACCEPTE »), export, reconnaissance de la même personne, import dans un profil vierge, puis un visage inconnu reste « Inconnu ».
+- **Parité avec InsightFace** : les 6 visages de l'image de test sont retrouvés, écart maximal des boîtes 0,17 px, similarité des embeddings au moins 0,9985.
+- **Tests** : 34 tests de logique (Node), 1 test de parité, 1 test de bout en bout dans Microsoft Edge avec caméra simulée. Tous passent.
+- **Écrans vérifiés** à 1920 x 1080 : reconnaissance (cadre « Claire Test », suggestion conforme à la phrase du cahier des charges), capture guidée, fiche, étape d'enregistrement.
+
+**Non vérifié :**
+- le débit en fps dans le navigateur (WASM, un seul thread) : à mesurer sur la machine de démo ;
+- un vrai visage en direct, les tests utilisent une caméra simulée ;
+- les navigateurs autres qu'Edge et les téléphones ;
+- le respect des poses : elles sont guidées, pas contrôlées.
+
+**Bloquant avant publication :**
+- GitHub Pages n'est gratuit que pour un dépôt public. Le dépôt est privé : il faut le rendre public ou prendre GitHub Pro.
+- Les modèles InsightFace (non commerciaux, D-021) ne peuvent pas être publiés sans accord de licence. Alternative : YuNet et SFace, licences permissives (D-033).
+
 ## Ce qui fonctionne
 
 - **Fiches clients** : 4 fiches fictives (`demo/clients.json`), validées à la lecture. Suggestion d'accueil selon l'heure (avant et après 12 h), avec sucre et lait affichés pour confirmation.

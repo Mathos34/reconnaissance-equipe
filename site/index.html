@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Maison Test : reconnaissance</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.30.0/dist/ort.min.js"></script>
+</head>
+<body class="page-accueil">
+  <header class="bandeau">
+    <a class="marque" href="index.html">Maison Test</a>
+    <nav class="navigation" aria-label="Pages">
+      <a href="index.html" aria-current="page">Reconnaissance</a>
+      <a href="clients.html">Clients</a>
+    </nav>
+  </header>
+
+  <main class="grille-accueil">
+    <section class="carte carte-video" aria-label="Flux de la caméra">
+      <div class="cadre-video">
+        <video id="video" playsinline muted></video>
+        <canvas id="superposition" aria-hidden="true"></canvas>
+        <div id="vide-camera" class="voile">
+          <p class="petit">Reconnaissance</p>
+          <button id="demarrer" class="bouton principal" type="button">Démarrer la caméra</button>
+          <p class="discret" id="message-camera"></p>
+        </div>
+      </div>
+      <div class="barre-info">
+        <span id="fps">- fps</span>
+        <span id="similarite">Similarité : -</span>
+        <span id="seuil">Seuil : -</span>
+        <button id="arreter" class="bouton discret" type="button" hidden>Arrêter</button>
+      </div>
+    </section>
+
+    <aside class="carte carte-fiche" aria-label="Fiche client">
+      <div class="barre-fiche">
+        <button id="bascule" class="bouton discret" type="button">Masquer la fiche</button>
+      </div>
+
+      <div id="accueil-fiche" class="accueil">
+        <p class="petit">Bienvenue chez</p>
+        <h1 class="titre">Maison Test</h1>
+        <p id="sous-accueil" class="discret">Un instant, nous préparons votre accueil.</p>
+      </div>
+
+      <div id="fiche" class="contenu" hidden>
+        <section class="bloc">
+          <p class="petit" id="conseiller"></p>
+          <h2 class="titre-fiche" id="nom-complet"></h2>
+          <p class="discret" id="repere"></p>
+        </section>
+
+        <section class="bloc">
+          <p class="petit">Préférences</p>
+          <p class="boisson" id="boisson"></p>
+          <dl class="grille-prefs">
+            <div><dt>Température</dt><dd id="temperature"></dd></div>
+            <div><dt>Sucre</dt><dd id="sucre"></dd></div>
+            <div><dt>Lait</dt><dd id="lait"></dd></div>
+          </dl>
+        </section>
+
+        <section class="bloc bloc-suggestion">
+          <p class="petit">Suggestion d'accueil</p>
+          <p class="accroche" id="accroche"></p>
+          <p class="discret">Sucre et lait à confirmer avec le client.</p>
+        </section>
+
+        <section class="bloc">
+          <p class="petit">Derniers achats</p>
+          <ul class="liste-achats" id="achats"></ul>
+        </section>
+
+        <section class="bloc">
+          <p class="petit">Notes du conseiller</p>
+          <p id="notes"></p>
+        </section>
+
+        <section class="bloc">
+          <p class="petit">Prochain rendez-vous</p>
+          <p id="rdv"></p>
+        </section>
+      </div>
+
+      <div id="masquee" class="accueil" hidden>
+        <p class="discret">Fiche masquée.</p>
+      </div>
+    </aside>
+  </main>
+
+  <div id="notifications" class="notifications" aria-live="polite"></div>
+  <script type="module" src="js/pages/accueil.js"></script>
+</body>
+</html>

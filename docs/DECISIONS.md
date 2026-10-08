@@ -163,3 +163,74 @@ Chaque décision indique le contexte, les alternatives écartées et les raisons
 - Dépôt public : exposerait le code de reconnaissance et les fiches de démo. Non retenu.
 
 **Raisons.** Dépôt privé sur le compte GitHub de l'auteur. Le dossier `data/` (copie locale des fiches de démo, galerie d'enrôlement), les poids et les images sont exclus par `.gitignore`. Seuls le code, les fiches fictives de `demo/` et la documentation sont versionnés.
+
+**Suite (voir D-031).** La demande de publication accessible par un lien, sans lancement local, change l'architecture. D-030 reste vrai pour le dépôt, mais GitHub Pages n'est pas gratuit sur un dépôt privé : la publication demande un dépôt public ou un compte GitHub Pro.
+
+---
+
+## D-031 : application web statique sur GitHub Pages, calcul dans le navigateur
+
+**Contexte.** Demande : une application publiée sur GitHub, accessible par un lien, sans lancer de serveur localement. Il faut pouvoir ajouter un client en prenant sa photo et en remplissant sa fiche dans le même écran, avec une base simple. Le serveur Python de la version locale ne peut pas tourner sur GitHub Pages, qui ne sert que des fichiers statiques.
+
+**Alternatives écartées.**
+- Serveur Python hébergé (Hugging Face Spaces, Render) : les photos des visages partent chez un tiers, l'hébergement gratuit est instable ou limité, et il faut maintenir un serveur.
+- Application Claude (artefact) : pratique pour un prototype, mais l'utilisateur demande explicitement GitHub.
+- Base de données externe (Supabase, Firebase) : compte à créer, clés à gérer, données chez un tiers. Reste une option si le partage entre appareils devient nécessaire (voir D-035).
+
+**Raisons.** Tout le traitement se fait dans le navigateur de la personne qui utilise la démo. Les images ne quittent jamais l'appareil, et il n'y a aucun serveur à maintenir. Le site est un dossier statique (`site/`) publié par une action GitHub (`.github/workflows/pages.yml`).
+
+**Ce que cela remplace.** D-022 (« aucune donnée ne quitte `data/` ») reste vrai pour les images, qui ne sont jamais conservées. Pour les gabarits, la version web les stocke dans le `localStorage` du navigateur, et plus dans `data/`. La version Python reste disponible comme archive et pour l'évaluation hors ligne.
+
+---
+
+## D-032 : ONNX Runtime Web 1.30.0, WebGPU puis WASM
+
+**Contexte.** Le navigateur doit exécuter les modèles SCRFD (détection) et MobileFaceNet (reconnaissance). ONNX Runtime Web est le moteur qui exécute les mêmes fichiers `.onnx` que la version Python.
+
+**Choix.** Version 1.30.0, chargée depuis le CDN jsDelivr. Elle a été publiée le 14 septembre 2026, soit plus de deux semaines avant la mise en ligne. WebGPU si le navigateur le propose, sinon WASM. `numThreads = 1`, car GitHub Pages n'envoie pas les en-têtes d'isolation d'origine croisée nécessaires aux threads WASM.
+
+**Alternatives écartées.** Un bundler npm (build à maintenir, sans gain pour une démo). TensorFlow.js ou face-api.js : d'autres modèles, donc d'autres résultats à revalider.
+
+---
+
+## D-033 : modèles buffalo_s dans `site/models/`, publication à trancher
+
+**Contexte.** Les deux fichiers nécessaires au navigateur sont `det_500m.onnx` (2,4 Mo) et `w600k_mbf.onnx` (13 Mo), déjà téléchargés pour la version Python. Le téléchargement a été autorisé pour `buffalo_s` seulement.
+
+**Problème.** Les poids InsightFace sont réservés à la recherche non commerciale (D-021). Publier un site public les redistribuerait.
+
+**Décision provisoire.** Les fichiers sont copiés dans `site/models/`, ignoré par git. Le site ne fonctionne donc pas encore en ligne. Publier les fichiers suppose un dépôt public et l'acceptation de cette licence.
+
+**Alternative à évaluer.** YuNet (détection) et SFace (reconnaissance) du projet OpenCV Zoo sont sous licences MIT et Apache 2.0, donc publiables sans restriction. Ils n'ont pas été téléchargés, la permission n'a pas été donnée. Le changement obligerait à revalider les seuils.
+
+---
+
+## D-034 : pipeline porté en JavaScript et validé contre InsightFace
+
+**Contexte.** Le navigateur doit reproduire exactement ce que fait InsightFace en Python, sinon les seuils calibrés ne valent plus.
+
+**Choix.** Le décodage SCRFD (trois niveaux, deux ancres, NMS), le letterbox à 640, l'alignement ArcFace à 112 points et la normalisation ont été portés depuis `insightface/model_zoo/scrfd.py`, `utils/face_align.py` et `model_zoo/arcface_onnx.py` de la version 2.1.
+
+**Validation.** Test de parité (`site/tests/parite.test.mjs`) sur une image d'exemple fournie avec InsightFace, non versionnée. Résultat : les 6 visages sont retrouvés, l'écart maximal des boîtes est de 0,17 px, et la similarité cosinus des embeddings est au moins de 0,9985 par rapport à Python.
+
+---
+
+## D-035 : base simple dans le navigateur, export et import JSON
+
+**Contexte.** Il faut une base simple pour les fiches et les gabarits, sans serveur.
+
+**Choix.** Une seule clé de `localStorage` (`maison-test/v1`) contient les fiches, les gabarits (512 nombres par client) et les consentements. L'export produit un JSON versionné. L'import vérifie toute la sauvegarde avant d'écrire : un fichier invalide ne modifie rien.
+
+**Limites.** Une base par navigateur : les clients ajoutés sur un ordinateur n'apparaissent pas sur un autre sans import. L'export contient les gabarits, donc il doit être conservé avec précaution.
+
+**Alternatives écartées.** IndexedDB (plus de code pour le même service). Supabase ou Firebase (compte, clés, données chez un tiers). À reconsidérer si le partage entre appareils devient une exigence.
+
+---
+
+## D-036 : enrôlement web, poses guidées et consentement obligatoire
+
+**Choix.** Vingt-cinq images valides en cinq poses, comme dans la version Python. Chaque image doit contenir un seul visage, avec un score d'au moins 0,6 et une largeur d'au moins 120 px. Une image est acceptée au plus toutes les 450 ms, pour que les poses aient le temps de changer. L'import de photos est possible à la place de la caméra. Le consentement « J'ACCEPTE » est demandé avant tout nouveau gabarit et sa date est enregistrée. Modifier une fiche sans recapturer ne demande pas de consentement.
+
+**Limite.** Les poses sont guidées à l'écran, mais leur respect n'est pas vérifié. Le contrôle d'angle demanderait une analyse plus fine des points du visage.
+
+**Aucune photo n'est conservée**, pas même une vignette, pour rester cohérent avec D-022.

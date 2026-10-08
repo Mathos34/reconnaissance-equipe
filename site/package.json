@@ -1,0 +1,14 @@
+{
+  "name": "maison-test-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Démo Maison Test : reconnaissance client dans le navigateur (GitHub Pages)",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "devDependencies": {
+    "jpeg-js": "^0.4.4",
+    "onnxruntime-node": "1.30.0"
+  }
+}

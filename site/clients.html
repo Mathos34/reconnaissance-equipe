@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Maison Test : gestion des clients</title>
+  <link rel="stylesheet" href="css/app.css">
+  <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.30.0/dist/ort.min.js"></script>
+</head>
+<body class="page-clients">
+  <header class="bandeau">
+    <a class="marque" href="index.html">Maison Test</a>
+    <nav class="navigation" aria-label="Pages">
+      <a href="index.html">Reconnaissance</a>
+      <a href="clients.html" aria-current="page">Clients</a>
+    </nav>
+  </header>
+
+  <main class="grille-clients">
+    <aside class="carte liste-clients" aria-label="Liste des clients">
+      <div class="entete-liste">
+        <h2 class="titre-section">Clients</h2>
+        <button id="nouveau" class="bouton principal petit" type="button">+ Nouveau</button>
+      </div>
+      <input id="recherche" type="search" placeholder="Rechercher" aria-label="Rechercher un client">
+      <ul id="liste" class="liste"></ul>
+      <p id="liste-vide" class="discret" hidden>Aucun client pour l'instant. Créez le premier avec « Nouveau ».</p>
+
+      <div class="sauvegarde">
+        <p class="petit">Sauvegarde</p>
+        <div class="ligne-boutons">
+          <button id="exporter" class="bouton discret petit" type="button">Exporter</button>
+          <label class="bouton discret petit bouton-fichier">Importer<input id="importer" type="file" accept=".json,application/json" hidden></label>
+        </div>
+        <fieldset class="mode-import">
+          <legend class="discret">À l'import</legend>
+          <label><input type="radio" name="mode" value="fusion" checked> Ajouter ou mettre à jour</label>
+          <label><input type="radio" name="mode" value="remplacer"> Remplacer toute la base</label>
+        </fieldset>
+      </div>
+    </aside>
+
+    <section class="carte editeur" aria-label="Fiche et enrôlement">
+      <header class="entete-editeur">
+        <h2 class="titre-section" id="titre-editeur">Nouveau client</h2>
+        <p class="discret" id="sous-titre">Trois étapes : photo, fiche, enregistrement.</p>
+      </header>
+
+      <ol class="etapes" id="etapes">
+        <li data-etape="1" class="active"><button type="button"><span>1</span> Photo</button></li>
+        <li data-etape="2"><button type="button"><span>2</span> Fiche</button></li>
+        <li data-etape="3"><button type="button"><span>3</span> Enregistrer</button></li>
+      </ol>
+
+      <!-- Étape 1 : photo et enrôlement du visage -->
+      <div id="etape-1" class="etape">
+        <div class="photo-grille">
+          <div class="cadre-capture">
+            <video id="video" playsinline muted></video>
+            <canvas id="superposition" aria-hidden="true"></canvas>
+            <div id="voile-capture" class="voile">
+              <button id="activer" class="bouton principal" type="button">Activer la caméra</button>
+              <p class="discret">Une seule personne, face à la caméra, avec une bonne lumière.</p>
+            </div>
+          </div>
+
+          <div class="panneau-capture">
+            <p class="petit">Consigne</p>
+            <p class="consigne" id="consigne">Activez la caméra pour commencer.</p>
+            <div class="progression" aria-hidden="true"><div id="barre" class="barre-progression"></div></div>
+            <p class="compte"><span id="compte">0</span> / <span id="cible">25</span> images valides</p>
+            <ul class="poses" id="poses" aria-label="Poses">
+              <li data-pose="0">Face</li>
+              <li data-pose="1">Gauche</li>
+              <li data-pose="2">Droite</li>
+              <li data-pose="3">Haut</li>
+              <li data-pose="4">Bas</li>
+            </ul>
+            <p class="retour" id="retour" aria-live="polite"></p>
+            <div class="actions">
+              <button id="pause" class="bouton discret petit" type="button" hidden>Pause</button>
+              <button id="recommencer" class="bouton discret petit" type="button">Recommencer</button>
+            </div>
+
+            <div class="import-photos">
+              <p class="petit">Ou importer des photos</p>
+              <label class="zone-depot" id="zone-depot">
+                <span>Glissez des photos ici, ou cliquez pour choisir</span>
+                <input id="fichiers" type="file" accept="image/*" multiple hidden>
+              </label>
+              <ul id="resultats-import" class="resultats" aria-live="polite"></ul>
+            </div>
+          </div>
+        </div>
+        <p class="gabarit-existant" id="gabarit-existant" hidden>Ce client a déjà un visage enregistré. Vous pouvez le garder tel quel, ou le refaire avec la capture ci-dessus.</p>
+      </div>
+
+      <!-- Étape 2 : fiche -->
+      <div id="etape-2" class="etape" hidden>
+        <form id="formulaire" novalidate>
+          <fieldset class="groupe">
+            <legend>Identité</legend>
+            <div class="ligne-champs">
+              <label>Identifiant<input name="identifiant" id="f-identifiant" autocomplete="off" required></label>
+              <label>Civilité<select name="civilite" required><option value="Madame">Madame</option><option value="Monsieur">Monsieur</option></select></label>
+            </div>
+            <div class="ligne-champs">
+              <label>Prénom<input name="prenom" autocomplete="off" required></label>
+              <label>Nom<input name="nom" autocomplete="off" required></label>
+            </div>
+            <label>Conseiller attitré<input name="conseiller" list="conseillers" autocomplete="off" required></label>
+            <datalist id="conseillers">
+              <option value="Camille Conseil"></option>
+              <option value="Hugo Vendeur"></option>
+            </datalist>
+          </fieldset>
+
+          <fieldset class="groupe">
+            <legend>Préférences</legend>
+            <label>Boisson préférée<input name="boisson" list="boissons" autocomplete="off" required></label>
+            <datalist id="boissons"></datalist>
+            <fieldset class="choix">
+              <legend>Température</legend>
+              <label><input type="radio" name="temperature" value="chaud"> Chaud</label>
+              <label><input type="radio" name="temperature" value="froid"> Froid</label>
+            </fieldset>
+            <div class="ligne-champs">
+              <label>Sucre<select name="sucre">
+                <option value="non">Sans sucre</option>
+                <option value="1">1 morceau</option>
+                <option value="2">2 morceaux</option>
+                <option value="3">3 morceaux</option>
+                <option value="4">4 morceaux</option>
+              </select></label>
+              <label>Lait<select name="lait" id="f-lait"></select></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="groupe">
+            <legend>Style et repères</legend>
+            <div class="ligne-champs">
+              <label>Taille de vêtement<input name="taille_vetement" autocomplete="off"></label>
+              <label>Styles préférés<input name="styles" autocomplete="off" placeholder="séparés par des virgules"></label>
+            </div>
+            <label>Cadeaux notés<input name="cadeaux_notes" autocomplete="off" placeholder="séparés par des virgules"></label>
+          </fieldset>
+
+          <fieldset class="groupe">
+            <legend>Derniers achats</legend>
+            <div id="achats" class="achats"></div>
+            <button type="button" id="ajouter-achat" class="bouton discret petit">+ Ajouter un achat</button>
+          </fieldset>
+
+          <fieldset class="groupe">
+            <legend>Suivi</legend>
+            <label>Notes du conseiller<textarea name="notes" rows="3"></textarea></label>
+            <label>Prochain rendez-vous<input type="datetime-local" name="prochain_rendez_vous"></label>
+          </fieldset>
+
+          <div id="erreurs-formulaire" class="erreurs" role="alert" hidden></div>
+        </form>
+      </div>
+
+      <!-- Étape 3 : consentement et enregistrement -->
+      <div id="etape-3" class="etape" hidden>
+        <div class="recapitulatif">
+          <div class="pastille" id="ok-photo"><span class="icone"></span><span id="texte-photo">Photo</span></div>
+          <div class="pastille" id="ok-fiche"><span class="icone"></span><span id="texte-fiche">Fiche</span></div>
+        </div>
+
+        <div class="bloc-consentement">
+          <h3>Consentement</h3>
+          <p>La personne accepte que son visage soit converti en un gabarit numérique.</p>
+          <label>Tapez <strong>J'ACCEPTE</strong> pour confirmer
+            <input id="consentement" autocomplete="off" placeholder="J'ACCEPTE">
+          </label>
+          <p class="discret" id="consentement-aide"></p>
+        </div>
+
+        <div class="actions-finales">
+          <button id="enregistrer" class="bouton principal" type="button" disabled>Enregistrer le client</button>
+          <button id="nouveau-apres" class="bouton discret" type="button" hidden>Ajouter un autre client</button>
+        </div>
+        <button id="supprimer" class="bouton danger petit" type="button" hidden>Supprimer ce client…</button>
+      </div>
+
+      <nav class="navigation-etapes" aria-label="Étapes">
+        <button id="precedent" class="bouton discret" type="button" hidden>← Précédent</button>
+        <button id="suivant" class="bouton principal" type="button">Suivant →</button>
+      </nav>
+    </section>
+  </main>
+
+  <dialog id="dialogue-suppression" class="dialogue">
+    <form method="dialog">
+      <h3>Supprimer un client</h3>
+      <p id="texte-suppression" class="discret"></p>
+      <label>Tapez <strong>SUPPRIMER</strong> pour confirmer<input id="mot-suppression" autocomplete="off"></label>
+      <div class="actions-dialogue">
+        <button value="annuler" class="bouton discret" type="submit">Annuler</button>
+        <button id="confirmer-biometrie" value="biometrie" class="bouton danger" type="submit">Retirer seulement le visage</button>
+        <button id="confirmer-tout" value="tout" class="bouton danger" type="submit">Supprimer tout</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="notifications" class="notifications" aria-live="polite"></div>
+  <script type="module" src="js/pages/clients.js"></script>
+</body>
+</html>
