@@ -92,21 +92,23 @@ def rediger(resultats: list[dict], source: str) -> str:
         f"Source des images : {source}",
         f"Cible : {FPS_CIBLE} fps. K = {K_DETECTION} (détection une image sur K).",
         "",
-        "| Modèle | Statut | Détection moy. (ms) | Détection p90 (ms) | fps (k=1) | fps (k=K) | Cible atteinte |",
-        "|---|---|---|---|---|---|---|",
+        "| Modèle | Statut | Visages par image | Détection moy. (ms) | Détection p90 (ms) | fps (k=1) | fps (k=K) | Cible atteinte |",
+        "|---|---|---|---|---|---|---|---|",
     ]
     for r in resultats:
         if r["statut"] != "mesuré":
-            lignes.append(f"| {r['modele']} | {r['statut']} | | | | | |")
+            lignes.append(f"| {r['modele']} | {r['statut']} | | | | | | |")
             continue
         atteinte = "oui" if r["fps_k"] >= FPS_CIBLE else "non"
         lignes.append(
-            f"| {r['modele']} | mesuré | {r['detection_moyenne_ms']} | {r['detection_p90_ms']} "
-            f"| {r['fps_k1']} | {r['fps_k']} | {atteinte} |"
+            f"| {r['modele']} | mesuré | {r['visages_par_image']} | {r['detection_moyenne_ms']} "
+            f"| {r['detection_p90_ms']} | {r['fps_k1']} | {r['fps_k']} | {atteinte} |"
         )
     lignes += [
         "",
         "fps (k=1) = 1 / temps de détection. fps (k=K) = K / temps de détection, sans le suivi ni le dessin.",
+        "Source « synthetique » : bruit sans visage, donc 0 visage attendu. Source « camera » : le nombre de visages",
+        "dépend de ce qui se trouve devant la caméra pendant la mesure. Aucune image n'est conservée.",
         "Les chiffres sont ceux mesurés sur cette machine, sans arrondi cosmétique.",
         "",
     ]

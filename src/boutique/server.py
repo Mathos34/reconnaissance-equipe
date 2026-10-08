@@ -14,6 +14,7 @@ import asyncio
 import json
 import threading
 import time
+from collections import deque
 from collections.abc import AsyncIterator, Iterator
 from contextlib import asynccontextmanager
 from datetime import datetime
@@ -37,6 +38,7 @@ COULEUR_CONNU = (74, 146, 184)  # or, en BGR
 COULEUR_INCONNU = (140, 140, 140)  # gris, en BGR
 RECHARGEMENT_SECONDES = 2.0
 ECHECS_CAMERA_AVANT_ERREUR = 30  # environ 1,5 s de lectures ratées avant de signaler la caméra en erreur
+FENETRE_FPS = 30
 
 
 class Etat:
@@ -180,8 +182,7 @@ class BoucleCamera(threading.Thread):
             capture.release()
 
     def _boucle(self, capture: cv2.VideoCapture, pipeline: Pipeline, clients: Clients) -> None:
-        fps = 0.0
-        derniere_image = time.monotonic()
+        instants: deque[float] = deque(maxlen=FENETRE_FPS)  # fps mesurés sur les 30 dernières images
         dernier_rechargement = 0.0
         echecs = 0
         while not self._arret.is_set():
@@ -211,8 +212,8 @@ class BoucleCamera(threading.Thread):
                 self._etat.mettre_a_jour(avertissement=avertissement)
 
             affichages = pipeline.traiter(image)
-            fps = 0.9 * fps + 0.1 * (1.0 / max(maintenant - derniere_image, 1e-6))
-            derniere_image = maintenant
+            instants.append(maintenant)
+            fps = (len(instants) - 1) / (instants[-1] - instants[0]) if len(instants) > 1 else 0.0
 
             ecran = dessiner(image, affichages, clients, fps)
             ok, jpeg = cv2.imencode(".jpg", ecran, [cv2.IMWRITE_JPEG_QUALITY, 80])

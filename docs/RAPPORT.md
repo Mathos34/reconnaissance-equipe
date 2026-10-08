@@ -8,27 +8,35 @@
 - **Enrôlement** : `python -m boutique.enroll --client C001`. Refus sans la saisie « J'ACCEPTE » (vérifié en exécution réelle). Refus d'un doublon, mise à jour après confirmation, suppression avec ou sans `--purge`.
 - **Serveur web** : démarre, sert la page de démo et `/etat`. En l'absence de poids, il signale le problème à l'écran au lieu de planter (vérifié).
 - **Reconnaissance** : suivi par IoU, détection une image sur K, lissage 3 sur 5. Logique entièrement couverte par les tests, sans caméra ni modèle.
-- **Tests** : 84 tests, tous passent. Ils couvrent les fiches, l'enrôlement, la suppression, la suggestion selon l'heure, le suivi, le lissage, la galerie, le pipeline et le serveur.
+- **Tests** : 88 tests, tous passent. Ils couvrent les fiches, l'enrôlement, la suppression, la suggestion selon l'heure, le suivi, le lissage, la galerie, le pipeline et le serveur.
 - **Notebook d'évaluation** : `notebooks/01_reconnaissance_equipe.ipynb`, exécuté avec ses sorties en mode synthétique, sans erreur. Il illustre le choix du seuil et le délai du lissage.
 - **Confidentialité** : aucune image n'est écrite sur le disque. Les visages inconnus restent en mémoire. Le dossier `data/` est ignoré par git.
 
 ## Fps mesurés
 
-**Aucun chiffre à ce jour.** Les poids InsightFace ne sont pas téléchargés : le téléchargement demande une autorisation explicite. `docs/BENCH.md` existe et indique « non mesuré » pour les deux modèles.
+Modèle `buffalo_s` (téléchargé avec autorisation, 159 Mo). `buffalo_l` n'est pas téléchargé : « non mesuré ».
 
-Cible : 10 fps sur la machine de démo. Machine : AMD Ryzen 7 5800H, 15,3 Go de RAM, calcul sur CPU (RTX 3060 non utilisée, voir D-018).
+| Mesure | Résultat |
+|---|---|
+| Détection seule, webcam, 3 passages | 34 à 44 ms par image, soit 23 à 29 fps (k=1) |
+| Détection seule, webcam, 1 passage détaillé | 39 ms moyenne, p90 58 ms, 1 visage par image |
+| Détection seule, images synthétiques | 16,5 ms, soit 60 fps (k=1) |
+| **Serveur complet, webcam, de bout en bout** | **environ 30 fps**, cadence de la caméra |
+
+Ces chiffres sont sur CPU : AMD Ryzen 7 5800H (8 cœurs), sans GPU (voir D-018). La cible de 10 fps est tenue avec de la marge. Le débit de bout en bout est plafonné par la caméra, à 30 images par seconde.
+
+Le détail est dans `docs/BENCH.md`. La variance entre passages est forte (19,6 ms, 59,6 ms, puis 34 à 44 ms), sans cause identifiée : charge du PC ou synchronisation OneDrive possibles.
 
 ## Ce qui n'est pas encore vérifié
 
-- La détection réelle de visages (aucun poids chargé, donc aucun visage détecté pour l'instant).
+- La reconnaissance d'un client enrôlé : la détection fonctionne sur un vrai visage (1 visage par image), mais aucun client n'est enrôlé pour l'instant, donc aucune fiche n'a été affichée en direct.
 - L'enrôlement avec la caméra : la capture n'a été testée qu'avec des images synthétiques.
 - Le rendu de la page dans un navigateur à 1920 x 1080. La syntaxe JavaScript est vérifiée, pas l'affichage.
 - Le seuil `SEUIL = 0,35`, qui n'est qu'une valeur de départ. Il doit être recalibré avec la caméra et l'éclairage de la démo.
 
 ## Ce qui reste à faire avant la présentation
 
-1. Autoriser le téléchargement de `buffalo_s` (environ 159 Mo), puis lancer `python -m boutique.bench` et reporter les chiffres dans ce rapport.
-2. Enrôler les membres de l'équipe qui joueront les clients, puis recalibrer `SEUIL` (procédure dans le README racine).
+1. Enrôler les membres de l'équipe qui joueront les clients, puis recalibrer `SEUIL` (procédure dans le README racine).
 3. Tester la démo de bout en bout à 1920 x 1080 : cadre, nom, fiche, bouton Masquer, écran d'accueil.
 4. Vérifier que la webcam est bien l'index 0 (`INDEX_CAMERA` dans `config.py`).
 5. Si `buffalo_l` est souhaité : 326 Mo de poids supplémentaires, à mesurer avant de décider (D-019).

@@ -32,7 +32,7 @@ Chaque décision indique le contexte, les alternatives écartées et les raisons
 
 ## D-019 : modèle par défaut `buffalo_s`, `buffalo_l` mesuré
 
-**Contexte.** Poids indicatifs d'après une recherche web (à vérifier au téléchargement) : `buffalo_s` ~159 Mo (détection 500 MF, reconnaissance MobileFaceNet), `buffalo_l` ~326 Mo (détection RetinaFace-10G, reconnaissance ResNet50). Disque : 15 Go libres. Cible : 10 fps.
+**Contexte.** Tailles de poids : `buffalo_s` 159 Mo, vérifiées au téléchargement (détection SCRFD 500 MF de 2,4 Mo, reconnaissance MobileFaceNet de 13 Mo, 137 Mo de modèle 3D), et `buffalo_l` environ 326 Mo selon une recherche web, non vérifiée (détection RetinaFace-10G, reconnaissance ResNet50). Disque : 15 Go libres. Cible : 10 fps.
 
 **Alternatives écartées.**
 - `buffalo_l` par défaut : meilleure précision selon le tableau cité, mais poids deux fois plus lourd et calcul CPU plus long. À reconsidérer si `bench.py` montre qu'il tient 10 fps avec K = 3.
