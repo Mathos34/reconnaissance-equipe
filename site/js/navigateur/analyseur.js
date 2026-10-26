@@ -33,15 +33,17 @@ function moteurDemande() {
   }
 }
 
+// Lu à l'ouverture de la page : le choix est mémorisé même si les modèles ne sont pas chargés sur cette page.
+const MOTEUR_DEMANDE = moteurDemande();
+
 /**
  * Plans de chargement à essayer dans l'ordre. Par défaut : WASM, le plus rapide et le plus régulier mesuré
  * sur le GPU que le navigateur choisit seul (docs/DECISIONS.md, D-037). ?moteur=webgpu ou ?moteur=hybride
  * sert aux machines dont le GPU dédié est activé pour le navigateur.
  */
 function plansDeChargement() {
-  const force = moteurDemande();
-  if (force === "webgpu") return [WEBGPU, WASM];
-  if (force === "hybride") return [HYBRIDE, WASM];
+  if (MOTEUR_DEMANDE === "webgpu") return [WEBGPU, WASM];
+  if (MOTEUR_DEMANDE === "hybride") return [HYBRIDE, WASM];
   return [WASM];
 }
 
