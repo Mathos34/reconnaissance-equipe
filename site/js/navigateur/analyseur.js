@@ -15,28 +15,18 @@ import { decoderScrfd } from "../coeur/scrfd.js";
 
 const WASM = { nom: "wasm", detection: ["wasm"], reconnaissance: ["wasm"] };
 const WEBGPU = { nom: "webgpu", detection: ["webgpu"], reconnaissance: ["webgpu"] };
-// Mesuré (docs/DECISIONS.md, D-037) : la détection est plus rapide en WebGPU (49 ms contre 69 ms),
-// la reconnaissance MobileFaceNet beaucoup plus lente (142 ms contre 37 ms). D'où le mode hybride.
 const HYBRIDE = { nom: "hybride", detection: ["webgpu"], reconnaissance: ["wasm"] };
 
-async function webgpuDisponible() {
-  if (!globalThis.navigator?.gpu) return false;
-  try {
-    return Boolean(await navigator.gpu.requestAdapter());
-  } catch {
-    return false;
-  }
-}
-
 /**
- * Plans de chargement à essayer dans l'ordre. Par défaut : hybride si WebGPU existe, sinon WASM.
- * Le paramètre d'URL ?moteur=wasm ou ?moteur=webgpu force un moteur, pour comparer ou se replier en démo.
+ * Plans de chargement à essayer dans l'ordre. Par défaut : WASM, le plus rapide et le plus régulier mesuré
+ * sur le GPU que le navigateur choisit seul (docs/DECISIONS.md, D-037). Le paramètre d'URL
+ * ?moteur=webgpu ou ?moteur=hybride sert aux machines dont le GPU dédié est activé pour le navigateur.
  */
-async function plansDeChargement() {
+function plansDeChargement() {
   const force = new URLSearchParams(globalThis.location?.search ?? "").get("moteur");
-  if (force === "wasm") return [WASM];
-  if (force === "webgpu") return [WEBGPU];
-  return (await webgpuDisponible()) ? [HYBRIDE, WASM] : [WASM];
+  if (force === "webgpu") return [WEBGPU, WASM];
+  if (force === "hybride") return [HYBRIDE, WASM];
+  return [WASM];
 }
 
 const maintenant = () => performance.now();
@@ -67,7 +57,7 @@ export class Analyseur {
 
     const debut = maintenant();
     let dernierErreur = null;
-    for (const plan of await plansDeChargement()) {
+    for (const plan of plansDeChargement()) {
       let detection = null;
       try {
         onProgression("Chargement du détecteur de visages");

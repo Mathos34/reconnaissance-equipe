@@ -1,24 +1,43 @@
 # Rapport d'avancement : démo « Maison Test »
 
-*Public visé : l'équipe projet et l'enseignant. État au 8 octobre 2026.*
+*Public visé : l'équipe projet et l'enseignant. État au 26 octobre 2026.*
 
 ## Version web (site/)
 
-- **Application statique** : la reconnaissance tourne dans le navigateur, avec ONNX Runtime Web 1.30.0 (WebGPU si disponible, sinon WASM). Aucune photo n'est envoyée à un serveur.
-- **Parcours complet** : ajout d'un client (capture de 25 images en cinq poses ou import de photos, fiche, consentement « J'ACCEPTE »), export, reconnaissance de la même personne, import dans un profil vierge, puis un visage inconnu reste « Inconnu ».
+- **Application statique** : la reconnaissance tourne dans le navigateur, avec ONNX Runtime Web 1.30.0. Processeur (WASM) par défaut, mode hybride ou WebGPU par paramètre d'adresse (D-037). Aucune photo n'est envoyée à un serveur.
+- **Parcours complet** : ajout d'un client (consentement « J'ACCEPTE » d'abord, puis capture de 25 images en cinq poses ou import de photos, fiche), export, reconnaissance de la même personne, import dans un profil vierge, puis un visage inconnu reste « Inconnu ».
+- **Indicateurs intégrés** (D-039) : tuiles en direct sur la page Reconnaissance, page Indicateurs avec graphiques et export JSON.
 - **Parité avec InsightFace** : les 6 visages de l'image de test sont retrouvés, écart maximal des boîtes 0,17 px, similarité des embeddings au moins 0,9985.
-- **Tests** : 34 tests de logique (Node), 1 test de parité, 1 test de bout en bout dans Microsoft Edge avec caméra simulée. Tous passent.
-- **Écrans vérifiés** à 1920 x 1080 : reconnaissance (cadre « Claire Test », suggestion conforme à la phrase du cahier des charges), capture guidée, fiche, étape d'enregistrement.
+- **Tests** : 45 tests Node (logique, indicateurs, parité), 1 test de bout en bout dans Microsoft Edge avec caméra simulée. Tous passent.
+- **Revue indépendante** : 20 points relevés, les principaux corrigés (D-038, D-041), dont le consentement qui arrivait après la capture.
+
+### Indicateurs mesurés
+
+Edge 156, Ryzen 7 5800H et RTX 3060, 5 sessions de 12 s par moteur (`evaluation/mesures_navigateur.py`).
+
+| Indicateur | Processeur (défaut) | Hybride, GPU dédié |
+|---|---|---|
+| Temps d'une analyse (médiane) | 132 ms | 108 ms |
+| Délai avant l'affichage de la fiche | 0,34 s | 0,20 s |
+| Images affichées par seconde | 19,8 | 24,2 |
+| Analyses par seconde | 6,6 | 8,1 |
+
+Robustesse (`evaluation/robustesse.py`, 6 identités, seuil 0,35) : 0 % de fausses acceptations, 11,7 % de refus à tort toutes conditions cumulées, identification à 100 % jusqu'à environ 2 m. Le modèle tient la lumière faible et la compression ; il décroche avec un flou fort, une tête inclinée à 90° ou plus de la moitié du visage masquée. Ces taux sont optimistes : enrôlement et test partent de la même photo.
+
+Enrôlement mesuré : 18,7 s pour 25 images valides.
 
 **Non vérifié :**
-- le débit en fps dans le navigateur (WASM, un seul thread) : à mesurer sur la machine de démo ;
-- un vrai visage en direct, les tests utilisent une caméra simulée ;
+- un vrai visage en direct dans les conditions de la soutenance, les mesures utilisent une caméra simulée ;
 - les navigateurs autres qu'Edge et les téléphones ;
 - le respect des poses : elles sont guidées, pas contrôlées.
 
-**Publication :** dépôt rendu public, site publié par GitHub Actions. Les modèles InsightFace (usage non commercial, D-021) sont versionnés, ce qui suppose un usage de test sans diffusion commerciale (D-033).
+**Publication :** dépôt public, site publié par GitHub Actions après les tests. Les modèles InsightFace (usage non commercial, D-021) sont versionnés, ce qui suppose un usage de test sans diffusion commerciale (D-033).
 
-## Ce qui fonctionne
+**Présentation :** `presentation/` génère le support (17 diapositives, PowerPoint et PDF) à partir des résultats mesurés.
+
+## Version Python locale (archive)
+
+### Ce qui fonctionne
 
 - **Fiches clients** : 4 fiches fictives (`demo/clients.json`), validées à la lecture. Suggestion d'accueil selon l'heure (avant et après 12 h), avec sucre et lait affichés pour confirmation.
 - **Enrôlement** : `python -m boutique.enroll --client C001`. Refus sans la saisie « J'ACCEPTE » (vérifié en exécution réelle). Refus d'un doublon, mise à jour après confirmation, suppression avec ou sans `--purge`.
@@ -28,7 +47,7 @@
 - **Notebook d'évaluation** : `notebooks/01_reconnaissance_equipe.ipynb`, exécuté avec ses sorties en mode synthétique, sans erreur. Il illustre le choix du seuil et le délai du lissage.
 - **Confidentialité** : aucune image n'est écrite sur le disque. Les visages inconnus restent en mémoire. Le dossier `data/` est ignoré par git.
 
-## Fps mesurés
+### Fps mesurés
 
 Modèle `buffalo_s` (téléchargé avec autorisation, 159 Mo). `buffalo_l` n'est pas téléchargé : « non mesuré ».
 
@@ -43,19 +62,17 @@ Ces chiffres sont sur CPU : AMD Ryzen 7 5800H (8 cœurs), sans GPU (voir D-018).
 
 Le détail est dans `docs/BENCH.md`. La variance entre passages est forte (19,6 ms, 59,6 ms, puis 34 à 44 ms), sans cause identifiée : charge du PC ou synchronisation OneDrive possibles.
 
-## Ce qui n'est pas encore vérifié
+### Ce qui n'est pas vérifié dans la version Python
 
-- La reconnaissance d'un client enrôlé : la détection fonctionne sur un vrai visage (1 visage par image), mais aucun client n'est enrôlé pour l'instant, donc aucune fiche n'a été affichée en direct.
+- La reconnaissance d'un client enrôlé en direct : la détection fonctionne sur un vrai visage, mais aucune fiche n'a été affichée en direct avec cette version.
 - L'enrôlement avec la caméra : la capture n'a été testée qu'avec des images synthétiques.
-- Le rendu de la page dans un navigateur à 1920 x 1080. La syntaxe JavaScript est vérifiée, pas l'affichage.
-- Le seuil `SEUIL = 0,35`, qui n'est qu'une valeur de départ. Il doit être recalibré avec la caméra et l'éclairage de la démo.
 
 ## Ce qui reste à faire avant la présentation
 
-1. Enrôler les membres de l'équipe qui joueront les clients, puis recalibrer `SEUIL` (procédure dans le README racine).
-3. Tester la démo de bout en bout à 1920 x 1080 : cadre, nom, fiche, bouton Masquer, écran d'accueil.
-4. Vérifier que la webcam est bien l'index 0 (`INDEX_CAMERA` dans `config.py`).
-5. Si `buffalo_l` est souhaité : 326 Mo de poids supplémentaires, à mesurer avant de décider (D-019).
+1. Sur le PC de démo : régler Microsoft Edge sur « Hautes performances » (Paramètres, Affichage, Graphiques), ouvrir le site avec `?moteur=hybride`.
+2. Enrôler les membres de l'équipe qui joueront les clients, avec l'éclairage de la salle, et garder un export JSON de secours.
+3. Vérifier le seuil 0,35 en direct : la similarité de chaque client et d'une personne non enregistrée s'affiche dans les indicateurs.
+4. Répéter la démo de 4 minutes (diapositive 10 du support) et compléter les noms de l'équipe sur la diapositive de titre.
 
 ## Points à signaler
 

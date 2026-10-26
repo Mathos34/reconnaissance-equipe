@@ -1,0 +1,3261 @@
+{
+  "date": "2026-10-26T15:02:21",
+  "machine": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD",
+  "dureeSessionS": 12.0,
+  "moteurs": {
+    "wasm": {
+      "disponible": true,
+      "erreur": null,
+      "sessions": [
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:02:56.699Z",
+          "fournisseur": "wasm",
+          "chargementMs": 275,
+          "seuil": 0.35,
+          "dureeS": 12.4,
+          "images": 278,
+          "fpsMoyen": 22.5,
+          "fpsMedian": 294.1,
+          "detections": 93,
+          "analysesParSeconde": 7.5,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 93,
+              "moyenne": 11.4,
+              "p50": 10.9,
+              "p95": 13.3,
+              "min": 10.4,
+              "max": 30.2
+            },
+            "inference": {
+              "n": 93,
+              "moyenne": 72.6,
+              "p50": 70.4,
+              "p95": 84.8,
+              "min": 67,
+              "max": 102.6
+            },
+            "embedding": {
+              "n": 93,
+              "moyenne": 37.8,
+              "p50": 37,
+              "p95": 43.3,
+              "min": 34.7,
+              "max": 59.7
+            },
+            "totale": {
+              "n": 93,
+              "moyenne": 121.8,
+              "p50": 118.9,
+              "p95": 142.1,
+              "min": 112.8,
+              "max": 167.1
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 295,
+            "p50": 295,
+            "p95": 295,
+            "min": 295,
+            "max": 295
+          },
+          "scores": {
+            "n": 93,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 93
+            }
+          ]
+        },
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:03:09.645Z",
+          "fournisseur": "wasm",
+          "chargementMs": 282,
+          "seuil": 0.35,
+          "dureeS": 12.5,
+          "images": 221,
+          "fpsMoyen": 17.7,
+          "fpsMedian": 266.7,
+          "detections": 74,
+          "analysesParSeconde": 5.9,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 74,
+              "moyenne": 16.2,
+              "p50": 14.5,
+              "p95": 25.5,
+              "min": 11.2,
+              "max": 34
+            },
+            "inference": {
+              "n": 74,
+              "moyenne": 93.1,
+              "p50": 90.8,
+              "p95": 117.8,
+              "min": 72.4,
+              "max": 135.4
+            },
+            "embedding": {
+              "n": 74,
+              "moyenne": 48.1,
+              "p50": 46.2,
+              "p95": 64.2,
+              "min": 37.5,
+              "max": 71.1
+            },
+            "totale": {
+              "n": 74,
+              "moyenne": 157.4,
+              "p50": 151.1,
+              "p95": 201.4,
+              "min": 121.4,
+              "max": 223.7
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 397,
+            "p50": 397,
+            "p95": 397,
+            "min": 397,
+            "max": 397
+          },
+          "scores": {
+            "n": 74,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 74
+            }
+          ]
+        },
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:03:22.525Z",
+          "fournisseur": "wasm",
+          "chargementMs": 254,
+          "seuil": 0.35,
+          "dureeS": 12.4,
+          "images": 236,
+          "fpsMoyen": 19,
+          "fpsMedian": 344.8,
+          "detections": 79,
+          "analysesParSeconde": 6.3,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 79,
+              "moyenne": 14.1,
+              "p50": 13.2,
+              "p95": 19.2,
+              "min": 10.9,
+              "max": 21.8
+            },
+            "inference": {
+              "n": 79,
+              "moyenne": 87.2,
+              "p50": 86.5,
+              "p95": 105.1,
+              "min": 71.2,
+              "max": 125.3
+            },
+            "embedding": {
+              "n": 79,
+              "moyenne": 44.9,
+              "p50": 43.6,
+              "p95": 56.1,
+              "min": 36.8,
+              "max": 64.7
+            },
+            "totale": {
+              "n": 79,
+              "moyenne": 146.2,
+              "p50": 145,
+              "p95": 177.1,
+              "min": 119.7,
+              "max": 202.1
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 292,
+            "p50": 292,
+            "p95": 292,
+            "min": 292,
+            "max": 292
+          },
+          "scores": {
+            "n": 79,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 79
+            }
+          ]
+        },
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:03:35.474Z",
+          "fournisseur": "wasm",
+          "chargementMs": 319,
+          "seuil": 0.35,
+          "dureeS": 12.4,
+          "images": 198,
+          "fpsMoyen": 15.9,
+          "fpsMedian": 238.1,
+          "detections": 66,
+          "analysesParSeconde": 5.3,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 66,
+              "moyenne": 18.8,
+              "p50": 18.3,
+              "p95": 26.9,
+              "min": 12.9,
+              "max": 38.6
+            },
+            "inference": {
+              "n": 66,
+              "moyenne": 102.5,
+              "p50": 97.9,
+              "p95": 135.2,
+              "min": 79,
+              "max": 140.9
+            },
+            "embedding": {
+              "n": 66,
+              "moyenne": 54.1,
+              "p50": 51.5,
+              "p95": 72.9,
+              "min": 39.6,
+              "max": 92.2
+            },
+            "totale": {
+              "n": 66,
+              "moyenne": 175.4,
+              "p50": 170.1,
+              "p95": 232.1,
+              "min": 133.7,
+              "max": 242.8
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 326,
+            "p50": 326,
+            "p95": 326,
+            "min": 326,
+            "max": 326
+          },
+          "scores": {
+            "n": 66,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 66
+            }
+          ]
+        },
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:03:49.337Z",
+          "fournisseur": "wasm",
+          "chargementMs": 927,
+          "seuil": 0.35,
+          "dureeS": 12.7,
+          "images": 219,
+          "fpsMoyen": 17.2,
+          "fpsMedian": 277.8,
+          "detections": 73,
+          "analysesParSeconde": 5.7,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 73,
+              "moyenne": 16.2,
+              "p50": 15.2,
+              "p95": 23.1,
+              "min": 11.5,
+              "max": 39
+            },
+            "inference": {
+              "n": 73,
+              "moyenne": 96.8,
+              "p50": 95.1,
+              "p95": 127.1,
+              "min": 74.4,
+              "max": 144.5
+            },
+            "embedding": {
+              "n": 73,
+              "moyenne": 49.9,
+              "p50": 48.8,
+              "p95": 61.6,
+              "min": 38.4,
+              "max": 69.1
+            },
+            "totale": {
+              "n": 73,
+              "moyenne": 162.9,
+              "p50": 161.2,
+              "p95": 200.9,
+              "min": 125.4,
+              "max": 232.9
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 363,
+            "p50": 363,
+            "p95": 363,
+            "min": 363,
+            "max": 363
+          },
+          "scores": {
+            "n": 73,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 73
+            }
+          ]
+        }
+      ]
+    },
+    "webgpu": {
+      "disponible": true,
+      "erreur": null,
+      "sessions": [
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:04:03.190Z",
+          "fournisseur": "webgpu",
+          "chargementMs": 755,
+          "seuil": 0.35,
+          "dureeS": 12.9,
+          "images": 141,
+          "fpsMoyen": 10.9,
+          "fpsMedian": 270.3,
+          "detections": 47,
+          "analysesParSeconde": 3.6,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 47,
+              "moyenne": 15.3,
+              "p50": 13.8,
+              "p95": 24.3,
+              "min": 10.9,
+              "max": 43.2
+            },
+            "inference": {
+              "n": 47,
+              "moyenne": 75.8,
+              "p50": 62.8,
+              "p95": 66.5,
+              "min": 29.1,
+              "max": 854.1
+            },
+            "embedding": {
+              "n": 47,
+              "moyenne": 169.8,
+              "p50": 160.7,
+              "p95": 178.4,
+              "min": 148.8,
+              "max": 501.6
+            },
+            "totale": {
+              "n": 47,
+              "moyenne": 261,
+              "p50": 235.5,
+              "p95": 258.4,
+              "min": 206.4,
+              "max": 1393.5
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 489,
+            "p50": 489,
+            "p95": 489,
+            "min": 489,
+            "max": 489
+          },
+          "scores": {
+            "n": 47,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 47
+            }
+          ]
+        },
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:04:17.012Z",
+          "fournisseur": "webgpu",
+          "chargementMs": 1208,
+          "seuil": 0.35,
+          "dureeS": 12.4,
+          "images": 138,
+          "fpsMoyen": 11.2,
+          "fpsMedian": 250,
+          "detections": 46,
+          "analysesParSeconde": 3.7,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 46,
+              "moyenne": 16.4,
+              "p50": 13.8,
+              "p95": 27.3,
+              "min": 11.2,
+              "max": 37.5
+            },
+            "inference": {
+              "n": 46,
+              "moyenne": 72.2,
+              "p50": 59.8,
+              "p95": 67.4,
+              "min": 34.3,
+              "max": 724.5
+            },
+            "embedding": {
+              "n": 46,
+              "moyenne": 168.9,
+              "p50": 163.5,
+              "p95": 184.5,
+              "min": 146.7,
+              "max": 371.2
+            },
+            "totale": {
+              "n": 46,
+              "moyenne": 257.6,
+              "p50": 233.8,
+              "p95": 270.9,
+              "min": 217.9,
+              "max": 1133.2
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 484,
+            "p50": 484,
+            "p95": 484,
+            "min": 484,
+            "max": 484
+          },
+          "scores": {
+            "n": 46,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 46
+            }
+          ]
+        },
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:04:30.927Z",
+          "fournisseur": "webgpu",
+          "chargementMs": 1298,
+          "seuil": 0.35,
+          "dureeS": 12.4,
+          "images": 141,
+          "fpsMoyen": 11.4,
+          "fpsMedian": 232.6,
+          "detections": 47,
+          "analysesParSeconde": 3.8,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 47,
+              "moyenne": 14.2,
+              "p50": 12.5,
+              "p95": 23.4,
+              "min": 10.4,
+              "max": 41.9
+            },
+            "inference": {
+              "n": 47,
+              "moyenne": 73.5,
+              "p50": 60.9,
+              "p95": 67.2,
+              "min": 24.2,
+              "max": 805.8
+            },
+            "embedding": {
+              "n": 47,
+              "moyenne": 162.5,
+              "p50": 159.8,
+              "p95": 172.8,
+              "min": 142.4,
+              "max": 317.9
+            },
+            "totale": {
+              "n": 47,
+              "moyenne": 250.3,
+              "p50": 232.7,
+              "p95": 255.4,
+              "min": 180.1,
+              "max": 1165.6
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 451,
+            "p50": 451,
+            "p95": 451,
+            "min": 451,
+            "max": 451
+          },
+          "scores": {
+            "n": 47,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 47
+            }
+          ]
+        },
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:04:44.317Z",
+          "fournisseur": "webgpu",
+          "chargementMs": 536,
+          "seuil": 0.35,
+          "dureeS": 12.6,
+          "images": 150,
+          "fpsMoyen": 11.9,
+          "fpsMedian": 303,
+          "detections": 50,
+          "analysesParSeconde": 4,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 50,
+              "moyenne": 14,
+              "p50": 13.1,
+              "p95": 20.1,
+              "min": 11.5,
+              "max": 28.8
+            },
+            "inference": {
+              "n": 50,
+              "moyenne": 67.3,
+              "p50": 59,
+              "p95": 69.2,
+              "min": 29.4,
+              "max": 599.4
+            },
+            "embedding": {
+              "n": 50,
+              "moyenne": 159.1,
+              "p50": 156.6,
+              "p95": 174.5,
+              "min": 143.4,
+              "max": 281.3
+            },
+            "totale": {
+              "n": 50,
+              "moyenne": 240.3,
+              "p50": 226.8,
+              "p95": 260.6,
+              "min": 194.4,
+              "max": 909.5
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 438,
+            "p50": 438,
+            "p95": 438,
+            "min": 438,
+            "max": 438
+          },
+          "scores": {
+            "n": 50,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 50
+            }
+          ]
+        },
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:04:58.004Z",
+          "fournisseur": "webgpu",
+          "chargementMs": 540,
+          "seuil": 0.35,
+          "dureeS": 12.9,
+          "images": 138,
+          "fpsMoyen": 10.7,
+          "fpsMedian": 227.3,
+          "detections": 46,
+          "analysesParSeconde": 3.6,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 46,
+              "moyenne": 18.2,
+              "p50": 16,
+              "p95": 29.3,
+              "min": 11.9,
+              "max": 52.8
+            },
+            "inference": {
+              "n": 46,
+              "moyenne": 75.7,
+              "p50": 63,
+              "p95": 70.8,
+              "min": 31.6,
+              "max": 835.1
+            },
+            "embedding": {
+              "n": 46,
+              "moyenne": 171.6,
+              "p50": 166.3,
+              "p95": 216.2,
+              "min": 152.9,
+              "max": 323.2
+            },
+            "totale": {
+              "n": 46,
+              "moyenne": 265.4,
+              "p50": 243.6,
+              "p95": 297.9,
+              "min": 204.3,
+              "max": 1204.8
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 460,
+            "p50": 460,
+            "p95": 460,
+            "min": 460,
+            "max": 460
+          },
+          "scores": {
+            "n": 46,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 46
+            }
+          ]
+        }
+      ]
+    },
+    "auto": {
+      "disponible": true,
+      "erreur": null,
+      "sessions": [
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:05:11.816Z",
+          "fournisseur": "hybride",
+          "chargementMs": 600,
+          "seuil": 0.35,
+          "dureeS": 12.9,
+          "images": 279,
+          "fpsMoyen": 21.6,
+          "fpsMedian": 274,
+          "detections": 93,
+          "analysesParSeconde": 7.2,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 93,
+              "moyenne": 15.6,
+              "p50": 14.2,
+              "p95": 22.1,
+              "min": 11.6,
+              "max": 59.2
+            },
+            "inference": {
+              "n": 93,
+              "moyenne": 65.7,
+              "p50": 59.4,
+              "p95": 64.4,
+              "min": 26.9,
+              "max": 880.8
+            },
+            "embedding": {
+              "n": 93,
+              "moyenne": 46.4,
+              "p50": 46,
+              "p95": 57.3,
+              "min": 36.3,
+              "max": 81.5
+            },
+            "totale": {
+              "n": 93,
+              "moyenne": 127.6,
+              "p50": 118.5,
+              "p95": 135.6,
+              "min": 86.3,
+              "max": 1021.5
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 240,
+            "p50": 240,
+            "p95": 240,
+            "min": 240,
+            "max": 240
+          },
+          "scores": {
+            "n": 93,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 93
+            }
+          ]
+        },
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:05:24.532Z",
+          "fournisseur": "hybride",
+          "chargementMs": 456,
+          "seuil": 0.35,
+          "dureeS": 12,
+          "images": 291,
+          "fpsMoyen": 24.2,
+          "fpsMedian": 266.7,
+          "detections": 97,
+          "analysesParSeconde": 8.1,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 97,
+              "moyenne": 13.1,
+              "p50": 12.2,
+              "p95": 20.8,
+              "min": 10.3,
+              "max": 27
+            },
+            "inference": {
+              "n": 97,
+              "moyenne": 57,
+              "p50": 56.8,
+              "p95": 63.4,
+              "min": 20,
+              "max": 579.4
+            },
+            "embedding": {
+              "n": 97,
+              "moyenne": 42.1,
+              "p50": 41.1,
+              "p95": 52,
+              "min": 35,
+              "max": 82
+            },
+            "totale": {
+              "n": 97,
+              "moyenne": 112.3,
+              "p50": 108.3,
+              "p95": 124.6,
+              "min": 73.1,
+              "max": 646
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 203,
+            "p50": 203,
+            "p95": 203,
+            "min": 203,
+            "max": 203
+          },
+          "scores": {
+            "n": 97,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 97
+            }
+          ]
+        },
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:05:38.433Z",
+          "fournisseur": "hybride",
+          "chargementMs": 999,
+          "seuil": 0.35,
+          "dureeS": 12.6,
+          "images": 330,
+          "fpsMoyen": 26.1,
+          "fpsMedian": 277.8,
+          "detections": 110,
+          "analysesParSeconde": 8.7,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 110,
+              "moyenne": 11.6,
+              "p50": 11.4,
+              "p95": 13.1,
+              "min": 10.1,
+              "max": 27.2
+            },
+            "inference": {
+              "n": 110,
+              "moyenne": 55,
+              "p50": 52.4,
+              "p95": 60.8,
+              "min": 27,
+              "max": 541.2
+            },
+            "embedding": {
+              "n": 110,
+              "moyenne": 37.1,
+              "p50": 36.3,
+              "p95": 41.2,
+              "min": 34.6,
+              "max": 58.3
+            },
+            "totale": {
+              "n": 110,
+              "moyenne": 103.7,
+              "p50": 99.9,
+              "p95": 110.2,
+              "min": 74.3,
+              "max": 621.3
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 201,
+            "p50": 201,
+            "p95": 201,
+            "min": 201,
+            "max": 201
+          },
+          "scores": {
+            "n": 110,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 110
+            }
+          ]
+        },
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:05:51.122Z",
+          "fournisseur": "hybride",
+          "chargementMs": 382,
+          "seuil": 0.35,
+          "dureeS": 12.1,
+          "images": 309,
+          "fpsMoyen": 25.5,
+          "fpsMedian": 250,
+          "detections": 103,
+          "analysesParSeconde": 8.5,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 103,
+              "moyenne": 12,
+              "p50": 11.3,
+              "p95": 16.5,
+              "min": 10.1,
+              "max": 22.4
+            },
+            "inference": {
+              "n": 103,
+              "moyenne": 56,
+              "p50": 54.8,
+              "p95": 60.9,
+              "min": 25.8,
+              "max": 505.4
+            },
+            "embedding": {
+              "n": 103,
+              "moyenne": 38.3,
+              "p50": 37.1,
+              "p95": 47.2,
+              "min": 34.9,
+              "max": 61.7
+            },
+            "totale": {
+              "n": 103,
+              "moyenne": 106.3,
+              "p50": 103.3,
+              "p95": 120.1,
+              "min": 77.2,
+              "max": 564.3
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 194,
+            "p50": 194,
+            "p95": 194,
+            "min": 194,
+            "max": 194
+          },
+          "scores": {
+            "n": 103,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 103
+            }
+          ]
+        },
+        {
+          "type": "reconnaissance",
+          "date": "2026-10-26T14:06:04.531Z",
+          "fournisseur": "hybride",
+          "chargementMs": 462,
+          "seuil": 0.35,
+          "dureeS": 12.7,
+          "images": 288,
+          "fpsMoyen": 22.6,
+          "fpsMedian": 243.9,
+          "detections": 96,
+          "analysesParSeconde": 7.5,
+          "latenceMs": {
+            "pretraitement": {
+              "n": 96,
+              "moyenne": 14,
+              "p50": 12.9,
+              "p95": 19.7,
+              "min": 10.3,
+              "max": 28.5
+            },
+            "inference": {
+              "n": 96,
+              "moyenne": 62.2,
+              "p50": 59,
+              "p95": 64.2,
+              "min": 24.5,
+              "max": 673
+            },
+            "embedding": {
+              "n": 96,
+              "moyenne": 44.6,
+              "p50": 42.5,
+              "p95": 56,
+              "min": 35.6,
+              "max": 72.4
+            },
+            "totale": {
+              "n": 96,
+              "moyenne": 120.8,
+              "p50": 113.7,
+              "p95": 133.1,
+              "min": 77.9,
+              "max": 755.2
+            }
+          },
+          "visagesMax": 1,
+          "pistesVues": 1,
+          "pistesReconnues": 1,
+          "identitesReconnues": 1,
+          "delaiReconnaissanceMs": {
+            "n": 1,
+            "moyenne": 211,
+            "p50": 211,
+            "p95": 211,
+            "min": 211,
+            "max": 211
+          },
+          "scores": {
+            "n": 96,
+            "moyenne": 1,
+            "p50": 1,
+            "p95": 1,
+            "min": 1,
+            "max": 1
+          },
+          "histogrammeScores": [
+            {
+              "debut": -0.2,
+              "fin": -0.15,
+              "n": 0
+            },
+            {
+              "debut": -0.15,
+              "fin": -0.1,
+              "n": 0
+            },
+            {
+              "debut": -0.1,
+              "fin": -0.05,
+              "n": 0
+            },
+            {
+              "debut": -0.05,
+              "fin": 0,
+              "n": 0
+            },
+            {
+              "debut": 0,
+              "fin": 0.05,
+              "n": 0
+            },
+            {
+              "debut": 0.05,
+              "fin": 0.1,
+              "n": 0
+            },
+            {
+              "debut": 0.1,
+              "fin": 0.15,
+              "n": 0
+            },
+            {
+              "debut": 0.15,
+              "fin": 0.2,
+              "n": 0
+            },
+            {
+              "debut": 0.2,
+              "fin": 0.25,
+              "n": 0
+            },
+            {
+              "debut": 0.25,
+              "fin": 0.3,
+              "n": 0
+            },
+            {
+              "debut": 0.3,
+              "fin": 0.35,
+              "n": 0
+            },
+            {
+              "debut": 0.35,
+              "fin": 0.4,
+              "n": 0
+            },
+            {
+              "debut": 0.4,
+              "fin": 0.45,
+              "n": 0
+            },
+            {
+              "debut": 0.45,
+              "fin": 0.5,
+              "n": 0
+            },
+            {
+              "debut": 0.5,
+              "fin": 0.55,
+              "n": 0
+            },
+            {
+              "debut": 0.55,
+              "fin": 0.6,
+              "n": 0
+            },
+            {
+              "debut": 0.6,
+              "fin": 0.65,
+              "n": 0
+            },
+            {
+              "debut": 0.65,
+              "fin": 0.7,
+              "n": 0
+            },
+            {
+              "debut": 0.7,
+              "fin": 0.75,
+              "n": 0
+            },
+            {
+              "debut": 0.75,
+              "fin": 0.8,
+              "n": 0
+            },
+            {
+              "debut": 0.8,
+              "fin": 0.85,
+              "n": 0
+            },
+            {
+              "debut": 0.85,
+              "fin": 0.9,
+              "n": 0
+            },
+            {
+              "debut": 0.9,
+              "fin": 0.95,
+              "n": 0
+            },
+            {
+              "debut": 0.95,
+              "fin": 1,
+              "n": 96
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "navigateur": {
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/156.0.0.0 Safari/537.36 Edg/156.0.0.0",
+    "coeursLogiques": 16,
+    "webgpu": "nvidia/ampere"
+  },
+  "enrolements": [
+    {
+      "type": "enrolement",
+      "date": "2026-10-26T14:02:42.798Z",
+      "source": "camera",
+      "dureeS": 15.8,
+      "imagesAnalysees": 79,
+      "imagesValides": 79,
+      "imagesRetenues": 25,
+      "tauxValides": 100,
+      "refus": {
+        "Image valide, ignorée pour varier les poses": 54
+      }
+    }
+  ],
+  "inconnu": [
+    {
+      "type": "reconnaissance",
+      "date": "2026-10-26T14:06:20.124Z",
+      "fournisseur": "wasm",
+      "chargementMs": 1010,
+      "seuil": 0.35,
+      "dureeS": 12.5,
+      "images": 278,
+      "fpsMoyen": 22.2,
+      "fpsMedian": 270.3,
+      "detections": 93,
+      "analysesParSeconde": 7.4,
+      "latenceMs": {
+        "pretraitement": {
+          "n": 93,
+          "moyenne": 11.7,
+          "p50": 11,
+          "p95": 14.5,
+          "min": 10.3,
+          "max": 22.7
+        },
+        "inference": {
+          "n": 93,
+          "moyenne": 73.2,
+          "p50": 69.1,
+          "p95": 94.1,
+          "min": 66.6,
+          "max": 123.6
+        },
+        "embedding": {
+          "n": 93,
+          "moyenne": 38.4,
+          "p50": 36.1,
+          "p95": 49.2,
+          "min": 34.9,
+          "max": 64
+        },
+        "totale": {
+          "n": 93,
+          "moyenne": 123.3,
+          "p50": 116.5,
+          "p95": 158.1,
+          "min": 113.2,
+          "max": 195.1
+        }
+      },
+      "visagesMax": 1,
+      "pistesVues": 1,
+      "pistesReconnues": 0,
+      "identitesReconnues": 0,
+      "delaiReconnaissanceMs": {
+        "n": 0,
+        "moyenne": null,
+        "p50": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "scores": {
+        "n": 93,
+        "moyenne": 0.039,
+        "p50": 0.039,
+        "p95": 0.039,
+        "min": 0.039,
+        "max": 0.039
+      },
+      "histogrammeScores": [
+        {
+          "debut": -0.2,
+          "fin": -0.15,
+          "n": 0
+        },
+        {
+          "debut": -0.15,
+          "fin": -0.1,
+          "n": 0
+        },
+        {
+          "debut": -0.1,
+          "fin": -0.05,
+          "n": 0
+        },
+        {
+          "debut": -0.05,
+          "fin": 0,
+          "n": 0
+        },
+        {
+          "debut": 0,
+          "fin": 0.05,
+          "n": 93
+        },
+        {
+          "debut": 0.05,
+          "fin": 0.1,
+          "n": 0
+        },
+        {
+          "debut": 0.1,
+          "fin": 0.15,
+          "n": 0
+        },
+        {
+          "debut": 0.15,
+          "fin": 0.2,
+          "n": 0
+        },
+        {
+          "debut": 0.2,
+          "fin": 0.25,
+          "n": 0
+        },
+        {
+          "debut": 0.25,
+          "fin": 0.3,
+          "n": 0
+        },
+        {
+          "debut": 0.3,
+          "fin": 0.35,
+          "n": 0
+        },
+        {
+          "debut": 0.35,
+          "fin": 0.4,
+          "n": 0
+        },
+        {
+          "debut": 0.4,
+          "fin": 0.45,
+          "n": 0
+        },
+        {
+          "debut": 0.45,
+          "fin": 0.5,
+          "n": 0
+        },
+        {
+          "debut": 0.5,
+          "fin": 0.55,
+          "n": 0
+        },
+        {
+          "debut": 0.55,
+          "fin": 0.6,
+          "n": 0
+        },
+        {
+          "debut": 0.6,
+          "fin": 0.65,
+          "n": 0
+        },
+        {
+          "debut": 0.65,
+          "fin": 0.7,
+          "n": 0
+        },
+        {
+          "debut": 0.7,
+          "fin": 0.75,
+          "n": 0
+        },
+        {
+          "debut": 0.75,
+          "fin": 0.8,
+          "n": 0
+        },
+        {
+          "debut": 0.8,
+          "fin": 0.85,
+          "n": 0
+        },
+        {
+          "debut": 0.85,
+          "fin": 0.9,
+          "n": 0
+        },
+        {
+          "debut": 0.9,
+          "fin": 0.95,
+          "n": 0
+        },
+        {
+          "debut": 0.95,
+          "fin": 1,
+          "n": 0
+        }
+      ]
+    },
+    {
+      "type": "reconnaissance",
+      "date": "2026-10-26T14:06:33.075Z",
+      "fournisseur": "wasm",
+      "chargementMs": 297,
+      "seuil": 0.35,
+      "dureeS": 12.5,
+      "images": 275,
+      "fpsMoyen": 22.1,
+      "fpsMedian": 285.7,
+      "detections": 92,
+      "analysesParSeconde": 7.4,
+      "latenceMs": {
+        "pretraitement": {
+          "n": 92,
+          "moyenne": 11.6,
+          "p50": 11,
+          "p95": 13.8,
+          "min": 10.5,
+          "max": 25.1
+        },
+        "inference": {
+          "n": 92,
+          "moyenne": 73.7,
+          "p50": 71.5,
+          "p95": 88.4,
+          "min": 66.8,
+          "max": 103.2
+        },
+        "embedding": {
+          "n": 92,
+          "moyenne": 38.7,
+          "p50": 38.1,
+          "p95": 45.9,
+          "min": 35.1,
+          "max": 56
+        },
+        "totale": {
+          "n": 92,
+          "moyenne": 124,
+          "p50": 121.1,
+          "p95": 146.2,
+          "min": 113,
+          "max": 160.4
+        }
+      },
+      "visagesMax": 1,
+      "pistesVues": 1,
+      "pistesReconnues": 0,
+      "identitesReconnues": 0,
+      "delaiReconnaissanceMs": {
+        "n": 0,
+        "moyenne": null,
+        "p50": null,
+        "p95": null,
+        "min": null,
+        "max": null
+      },
+      "scores": {
+        "n": 92,
+        "moyenne": 0.039,
+        "p50": 0.039,
+        "p95": 0.039,
+        "min": 0.039,
+        "max": 0.039
+      },
+      "histogrammeScores": [
+        {
+          "debut": -0.2,
+          "fin": -0.15,
+          "n": 0
+        },
+        {
+          "debut": -0.15,
+          "fin": -0.1,
+          "n": 0
+        },
+        {
+          "debut": -0.1,
+          "fin": -0.05,
+          "n": 0
+        },
+        {
+          "debut": -0.05,
+          "fin": 0,
+          "n": 0
+        },
+        {
+          "debut": 0,
+          "fin": 0.05,
+          "n": 92
+        },
+        {
+          "debut": 0.05,
+          "fin": 0.1,
+          "n": 0
+        },
+        {
+          "debut": 0.1,
+          "fin": 0.15,
+          "n": 0
+        },
+        {
+          "debut": 0.15,
+          "fin": 0.2,
+          "n": 0
+        },
+        {
+          "debut": 0.2,
+          "fin": 0.25,
+          "n": 0
+        },
+        {
+          "debut": 0.25,
+          "fin": 0.3,
+          "n": 0
+        },
+        {
+          "debut": 0.3,
+          "fin": 0.35,
+          "n": 0
+        },
+        {
+          "debut": 0.35,
+          "fin": 0.4,
+          "n": 0
+        },
+        {
+          "debut": 0.4,
+          "fin": 0.45,
+          "n": 0
+        },
+        {
+          "debut": 0.45,
+          "fin": 0.5,
+          "n": 0
+        },
+        {
+          "debut": 0.5,
+          "fin": 0.55,
+          "n": 0
+        },
+        {
+          "debut": 0.55,
+          "fin": 0.6,
+          "n": 0
+        },
+        {
+          "debut": 0.6,
+          "fin": 0.65,
+          "n": 0
+        },
+        {
+          "debut": 0.65,
+          "fin": 0.7,
+          "n": 0
+        },
+        {
+          "debut": 0.7,
+          "fin": 0.75,
+          "n": 0
+        },
+        {
+          "debut": 0.75,
+          "fin": 0.8,
+          "n": 0
+        },
+        {
+          "debut": 0.8,
+          "fin": 0.85,
+          "n": 0
+        },
+        {
+          "debut": 0.85,
+          "fin": 0.9,
+          "n": 0
+        },
+        {
+          "debut": 0.9,
+          "fin": 0.95,
+          "n": 0
+        },
+        {
+          "debut": 0.95,
+          "fin": 1,
+          "n": 0
+        }
+      ]
+    }
+  ],
+  "gpuHautePerformance": true
+}

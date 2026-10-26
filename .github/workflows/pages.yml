@@ -27,7 +27,8 @@ jobs:
           node-version: 20
       - run: npm ci
         working-directory: site
-      - run: node --test tests/coeur.test.mjs
+      # Tous les tests Node ; la parité est ignorée sans les données de evaluation/donnees/.
+      - run: node --test tests/
         working-directory: site
 
   deploy:

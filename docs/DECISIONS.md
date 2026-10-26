@@ -234,3 +234,81 @@ Chaque décision indique le contexte, les alternatives écartées et les raisons
 **Limite.** Les poses sont guidées à l'écran, mais leur respect n'est pas vérifié. Le contrôle d'angle demanderait une analyse plus fine des points du visage.
 
 **Aucune photo n'est conservée**, pas même une vignette, pour rester cohérent avec D-022.
+
+---
+
+## D-037 : moteur de calcul choisi par la mesure (WASM par défaut, hybride en démo)
+
+**Contexte.** La première version choisissait WebGPU dès qu'il était disponible, en supposant que la carte graphique accélère tout. Les indicateurs de D-039 permettent de vérifier cette hypothèse. Mesures avec `evaluation/mesures_navigateur.py`, Edge 156, Ryzen 7 5800H (iGPU Radeon) et RTX 3060, 5 sessions de 12 s par moteur, médianes en ms :
+
+| Moteur | Préparation | Détection | Reconnaissance | Total | Délai avant la fiche |
+|---|---|---|---|---|---|
+| WASM (processeur) | 13 | 77 | 41 | 132 | 337 |
+| WebGPU, GPU intégré | 12 | 79 | 149 | 243 | 626 |
+| Hybride, GPU intégré | 12 | 101 | 42 | 157 | 377 |
+| WebGPU, RTX 3060 | 14 | 61 | 161 | 234 | 460 |
+| Hybride, RTX 3060 | 12 | 57 | 41 | 108 | 203 |
+
+Hybride : détection en WebGPU, reconnaissance en WASM. Dans la même série que la RTX, WASM mesure 151 ms : l'écart entre deux séries donne l'ordre de grandeur du bruit.
+
+**Constats.**
+- Edge utilise par défaut le GPU intégré (adaptateur `amd/gcn-5`), même avec `powerPreference: "high-performance"`. La RTX n'est utilisée qu'avec le réglage Windows (Paramètres, Affichage, Graphiques, Microsoft Edge sur « Hautes performances ») ou l'option `--force_high_performance_gpu`.
+- La reconnaissance (MobileFaceNet) est 3 à 4 fois plus lente en WebGPU qu'en WASM, quelle que soit la carte : une partie des opérations du modèle n'est probablement pas prise en charge par WebGPU.
+- La détection n'accélère qu'avec la carte dédiée.
+
+**Décision.** WASM par défaut : c'est le seul réglage qui n'est jamais pire, quel que soit le poste du visiteur. `?moteur=hybride` et `?moteur=webgpu` forcent les autres modes, avec retour à WASM en cas d'échec. Le PC de démo utilise `?moteur=hybride` après le réglage Windows, soit 108 ms par analyse et 0,20 s avant la fiche.
+
+**Note.** Dans les fichiers de résultats, la clé `auto` désigne les sessions mesurées avant l'ajout de `?moteur=` ; leur fournisseur enregistré est `hybride`.
+
+**Alternative écartée.** Détecter la carte et choisir automatiquement : l'adaptateur exposé par le navigateur ne dit pas de façon fiable s'il s'agit d'une carte dédiée, et une erreur de choix double le temps d'analyse.
+
+---
+
+## D-038 : consentement demandé avant toute capture (correction)
+
+**Contexte.** La première version web calculait les 25 embeddings à l'étape 1 et ne demandait « J'ACCEPTE » qu'à l'étape 3. C'était un traitement biométrique avant consentement, contraire au cahier des charges et à la version Python, qui demande la mention avant d'ouvrir la caméra. La revue indépendante l'a relevé.
+
+**Décision.** Le consentement est la première action de l'étape 1. La caméra et l'import de photos restent désactivés tant que la mention n'est pas tapée, et la date est figée à ce moment. `Base.enregistrer` et `Base.importer` refusent un gabarit sans consentement daté.
+
+**Alternative écartée.** Garder le consentement à la fin, en précisant que les embeddings restent en mémoire : techniquement vrai, mais contraire à l'esprit de la règle.
+
+---
+
+## D-039 : indicateurs mesurés par l'application elle-même
+
+**Contexte.** La présentation doit s'appuyer sur des KPI réels, et les réglages (moteur, seuil, K) doivent être pilotés par la mesure.
+
+**Choix.** Un module pur (`site/js/coeur/indicateurs.js`, testé) mesure :
+- par session de reconnaissance : temps par étape (préparation, détection, reconnaissance), images affichées et analyses par seconde, délai entre l'apparition d'un visage et l'affichage de sa fiche, distribution des similarités, temps de chargement des modèles ;
+- par enrôlement : durée, images analysées, valides et retenues, motifs de refus.
+
+Les résumés vont dans un journal `localStorage` (100 entrées au plus), affiché par la page Indicateurs et exportable en JSON. La mémoire des mesures est bornée. Le fps retenu est le nombre d'images affichées divisé par la durée : l'intervalle médian serait trompeur, car deux images sur trois sont sans analyse.
+
+**Alternative écartée.** Mesurer seulement depuis un script externe : les chiffres ne seraient pas visibles pendant la démo.
+
+---
+
+## D-040 : évaluation reproductible dans `evaluation/`
+
+**Contexte.** Les données de test vivaient dans un dossier temporaire, effacé entre deux sessions de travail. Les chiffres de la présentation doivent pouvoir être recalculés.
+
+**Choix.**
+- `preparer_donnees.py` régénère la référence de parité et les vidéos de caméra simulée à partir des images d'exemple installées avec InsightFace. Aucun téléchargement, et rien n'est versionné (`evaluation/donnees/`).
+- `robustesse.py` mesure détection et identification sous conditions dégradées (distance, lumière, flou, inclinaison, masque, bruit, compression) et calcule les courbes FAR et FRR.
+- `mesures_navigateur.py` pilote Edge et relève les indicateurs du site lui-même.
+- Les résultats chiffrés, sans image, sont versionnés dans `evaluation/resultats/`.
+
+**Limites assumées.** 6 identités, une seule photo source par personne pour l'enrôlement et le test, perturbations synthétiques : les taux sont indicatifs et optimistes. La caméra simulée répète la même image : les temps sont réalistes, les similarités des personnes connues ne le sont pas.
+
+---
+
+## D-041 : corrections issues de la revue indépendante
+
+Une revue en lecture seule du site a relevé 20 points. Les principaux sont corrigés :
+- la touche Échap pouvait supprimer un client sans confirmation, car la suppression dépendait de `returnValue` : elle est désormais appliquée seulement dans le gestionnaire de clic, après vérification du mot ;
+- renommer un client en modification écrasait un autre client : l'identifiant passe en lecture seule ;
+- la caméra pouvait s'ouvrir après avoir quitté l'étape, et une image pouvait être attribuée au mauvais client : des jetons de caméra et de client sont vérifiés après chaque `await` ;
+- l'import acceptait un gabarit nul (qui bloquait ensuite la reconnaissance pour tous), des champs mal typés, et un gabarit sans consentement : tout est validé avant écriture, et les gabarits sont normalisés ;
+- environ 9,5 Mo d'allocations par détection : les tampons sont réutilisés, sans changement des calculs (parité vérifiée à nouveau) ;
+- accessibilité : champs de fichier utilisables au clavier, focus déplacé à chaque étape, erreurs reliées aux champs, contrastes au niveau AA dans les deux modes.
+

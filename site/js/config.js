@@ -2,8 +2,7 @@
 
 export const NOM_BOUTIQUE = "Maison Test";
 
-// ONNX Runtime Web, version figée (publiée plus de deux semaines avant la mise en ligne).
-export const URL_ORT = "https://cdn.jsdelivr.net/npm/onnxruntime-web@1.30.0/dist/ort.min.js";
+// ONNX Runtime Web 1.30.0 est chargé par une balise <script> dans index.html et clients.html (version figée).
 
 // Modèles buffalo_s d'InsightFace, copiés dans site/models/ (voir docs/DECISIONS.md, D-031).
 export const URL_MODELE_DETECTION = "./models/det_500m.onnx";

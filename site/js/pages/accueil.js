@@ -170,8 +170,8 @@ function afficherIndicateurs(affichages, instant) {
   const meilleure = affichages.reduce((max, a) => Math.max(max, a.score), -Infinity);
   $("#kpi-fps").textContent = virgule(m.fpsRecent(), 1);
   $("#kpi-analyses").textContent = virgule(m.analysesRecentes(), 1);
-  $("#kpi-latence").textContent = latence === null ? "-" : String(Math.round(latence));
-  $("#kpi-delai").textContent = delai === null ? "-" : virgule(delai / 1000, 1);
+  $("#kpi-latence").textContent = latence === null ? "-" : `${Math.round(latence)} ms`;
+  $("#kpi-delai").textContent = delai === null ? "-" : `${virgule(delai / 1000, 2)} s`;
   $("#kpi-similarite").textContent = Number.isFinite(meilleure) ? virgule(meilleure, 2) : "-";
 }
 
@@ -289,5 +289,5 @@ window.addEventListener("pagehide", enregistrerSession);
 // Premier affichage : état de la base.
 rechargerFiches();
 rafraichirAccueil();
-$("#libelle-similarite").textContent = `Similarité (seuil ${virgule(SEUIL, 2)})`;
+$("#tuile-similarite").title = `Meilleure similarité des visages visibles (seuil de reconnaissance : ${virgule(SEUIL, 2)})`;
 if (etat.fiches.size === 0) statut("Aucun client enregistré : ajoutez-en depuis la page Clients.");

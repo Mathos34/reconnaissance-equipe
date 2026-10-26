@@ -2,8 +2,8 @@
 
 Microsoft Edge pilote le site avec une caméra simulée (vidéos de evaluation/donnees/) :
 1. une inscription complète (consentement, 25 images, fiche) : indicateurs d'enrôlement ;
-2. plusieurs sessions de reconnaissance par moteur : WASM, WebGPU, puis le mode par défaut
-   (hybride : détection en WebGPU, reconnaissance en WASM) ;
+2. plusieurs sessions de reconnaissance par moteur : WASM (par défaut), WebGPU, puis hybride
+   (détection en WebGPU, reconnaissance en WASM), choisis par le paramètre d'URL ?moteur= ;
 3. des sessions avec un visage jamais enregistré, pour la distribution des similarités d'inconnus.
 
 Limite : la caméra simulée répète la même image. Les temps de calcul et le délai avant reconnaissance
@@ -36,6 +36,9 @@ URL = f"http://127.0.0.1:{PORT}"
 EDGE = os.environ.get("MT_EDGE", r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe")
 SESSIONS_PAR_MOTEUR = int(os.environ.get("MT_SESSIONS", "5"))
 DUREE_SESSION_S = float(os.environ.get("MT_DUREE", "12"))
+# MT_GPU_HAUTE_PERF=1 : force le GPU dédié (sur ce PC, la RTX 3060 au lieu du GPU intégré AMD).
+GPU_HAUTE_PERF = os.environ.get("MT_GPU_HAUTE_PERF") == "1"
+FICHIER = "navigateur_gpu_dedie.json" if GPU_HAUTE_PERF else "navigateur.json"
 CLE_JOURNAL = "maison-test/indicateurs/v1"
 
 # Réutilise le parcours d'inscription du test de bout en bout.
@@ -56,6 +59,7 @@ def lancer(p, video: Path):
             "--autoplay-policy=no-user-gesture-required",
             "--enable-unsafe-webgpu",
             "--no-sandbox",
+            *(["--force_high_performance_gpu"] if GPU_HAUTE_PERF else []),
         ],
     )
 
@@ -87,7 +91,10 @@ def infos_navigateur(page) -> dict:
         """async () => ({
             userAgent: navigator.userAgent,
             coeursLogiques: navigator.hardwareConcurrency,
-            webgpu: !!navigator.gpu && !!(await navigator.gpu.requestAdapter().catch(() => null)),
+            webgpu: await (async () => {
+                const a = navigator.gpu && (await navigator.gpu.requestAdapter().catch(() => null));
+                return a ? `${a.info?.vendor}/${a.info?.architecture}` : null;
+            })(),
         })"""
     )
 
@@ -118,14 +125,13 @@ def main() -> int:
             resultat["enrolements"] = [e for e in journal(page) if e["type"] == "enrolement"]
             print(f"Inscription : {resultat['enrolements'][-1]['dureeS']} s, {resultat['enrolements'][-1]['tauxValides']} % d'images valides")
 
-            for moteur in ("wasm", "webgpu", "auto"):
+            for moteur in ("wasm", "webgpu", "hybride"):
                 erreur = None
                 for i in range(SESSIONS_PAR_MOTEUR):
                     erreur = session(page, moteur)
                     if erreur:
                         break
-                attendu = "hybride" if moteur == "auto" else moteur
-                sessions = [e for e in journal(page) if e["type"] == "reconnaissance" and e["fournisseur"] == attendu]
+                sessions = [e for e in journal(page) if e["type"] == "reconnaissance" and e["fournisseur"] == moteur]
                 resultat["moteurs"][moteur] = {"disponible": erreur is None, "erreur": erreur, "sessions": sessions}
                 if sessions:
                     print(f"{moteur} : {len(sessions)} sessions, analyse médiane {[s['latenceMs']['totale']['p50'] for s in sessions]} ms")
@@ -147,8 +153,9 @@ def main() -> int:
     finally:
         serveur.terminate()
 
-    ecrire_json(DOSSIER_RESULTATS / "navigateur.json", resultat)
-    print(f"Résultats : {DOSSIER_RESULTATS / 'navigateur.json'}")
+    resultat["gpuHautePerformance"] = GPU_HAUTE_PERF
+    ecrire_json(DOSSIER_RESULTATS / FICHIER, resultat)
+    print(f"Adaptateur WebGPU : {resultat['navigateur']['webgpu']}. Résultats : {DOSSIER_RESULTATS / FICHIER}")
     return 0
 
 

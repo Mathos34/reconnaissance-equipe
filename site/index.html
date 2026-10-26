@@ -31,12 +31,12 @@
       </div>
       <div class="barre-info">
         <dl class="indicateurs-direct" aria-label="Indicateurs en direct" aria-live="off">
-          <div class="kpi"><dt>Images par seconde</dt><dd id="kpi-fps">-</dd></div>
-          <div class="kpi"><dt>Analyse (ms)</dt><dd id="kpi-latence">-</dd></div>
-          <div class="kpi"><dt>Reconnu en (s)</dt><dd id="kpi-delai">-</dd></div>
-          <div class="kpi"><dt>Analyses par seconde</dt><dd id="kpi-analyses">-</dd></div>
-          <div class="kpi"><dt id="libelle-similarite">Similarité</dt><dd id="kpi-similarite">-</dd></div>
-          <div class="kpi"><dt>Moteur</dt><dd id="kpi-moteur">-</dd></div>
+          <div class="kpi" title="Images affichées par seconde"><dt>Images / s</dt><dd id="kpi-fps">-</dd></div>
+          <div class="kpi" title="Durée d'une analyse : détection et reconnaissance"><dt>Analyse</dt><dd id="kpi-latence">-</dd></div>
+          <div class="kpi" title="Délai entre l'apparition d'un visage et l'affichage de sa fiche"><dt>Reconnu en</dt><dd id="kpi-delai">-</dd></div>
+          <div class="kpi" title="Analyses par seconde (une image sur trois)"><dt>Analyses / s</dt><dd id="kpi-analyses">-</dd></div>
+          <div class="kpi" id="tuile-similarite" title="Meilleure similarité des visages visibles"><dt>Similarité</dt><dd id="kpi-similarite">-</dd></div>
+          <div class="kpi" title="Moteur de calcul"><dt>Moteur</dt><dd id="kpi-moteur">-</dd></div>
         </dl>
         <button id="arreter" class="bouton discret" type="button" hidden>Arrêter</button>
       </div>

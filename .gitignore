@@ -20,3 +20,6 @@ site/tests/e2e/__pycache__/
 
 # Évaluation : images et vidéos de test régénérables (python evaluation/preparer_donnees.py)
 evaluation/donnees/
+
+# Présentation : dépendances de génération du deck
+presentation/node_modules/

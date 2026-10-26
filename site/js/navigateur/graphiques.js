@@ -163,7 +163,6 @@ export function colonnes(conteneur, { categories, series, format = String, unite
     svg.append(el("line", { x1: margeGauche, x2: LARGEUR - 12, y1: y, y2: y, class: g === 0 ? "axe" : "grille" }));
     svg.append(el("text", { x: margeGauche - 8, y, class: "graduation", "text-anchor": "end", "dominant-baseline": "middle" }, format(g)));
   }
-  if (unite) svg.append(el("text", { x: margeGauche - 8, y: 8, class: "graduation", "text-anchor": "end" }, unite));
 
   categories.forEach((categorie, i) => {
     const x = margeGauche + i * pasX + (pasX - largeurBarre) / 2;
