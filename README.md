@@ -40,6 +40,8 @@ Le site calcule sur le processeur (WASM) par défaut : c'est le réglage le plus
 - `?moteur=hybride` : détection sur la carte graphique, reconnaissance sur le processeur. Le plus rapide avec une carte dédiée.
 - `?moteur=webgpu` : tout sur la carte graphique.
 
+Le choix est mémorisé dans le navigateur de l'appareil, pour toutes les pages ; `?moteur=wasm` revient au processeur.
+
 Sous Windows, Edge utilise le GPU intégré par défaut. Pour la carte dédiée : Paramètres, Affichage, Graphiques, Microsoft Edge sur « Hautes performances ».
 
 ## Publier sur GitHub Pages
@@ -97,12 +99,16 @@ Les résultats chiffrés sont versionnés dans `evaluation/resultats/`.
 
 ## Présentation
 
-`presentation/` génère le support de soutenance à partir des résultats mesurés : `Maison-Test-reconnaissance-client.pptx` et sa version PDF.
+`presentation/` génère le support de soutenance à partir des résultats mesurés (`mesures.js`, commun aux deux langues) :
+
+- en anglais, avec le thème de la maison : `Maison-Test-client-recognition.pptx` et sa version PDF ;
+- en français (première version) : `Maison-Test-reconnaissance-client.pptx` et sa version PDF.
 
 ```powershell
 cd presentation
 npm ci
-npm run deck
+npm run deck       # anglais
+npm run deck:fr    # français
 ```
 
 Les captures d'écran (`presentation/images/`) sont refaites par `python presentation\captures.py`, avec les visages pixélisés.

@@ -4,7 +4,8 @@
   "private": true,
   "description": "Génère la présentation PowerPoint du projet Maison Test à partir des mesures",
   "scripts": {
-    "deck": "node generer_deck.js"
+    "deck": "node generer_deck_en.js",
+    "deck:fr": "node generer_deck.js"
   },
   "dependencies": {
     "pptxgenjs": "4.0.1",

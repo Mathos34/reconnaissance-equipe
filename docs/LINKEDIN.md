@@ -1,14 +1,14 @@
 # Post LinkedIn : brouillon
 
-À compléter avant publication : nom du cours, prénoms de l'équipe, nom de l'enseignant (à identifier dans le post), liens.
+À compléter avant publication : nom du cours, nom de l'enseignant (à identifier dans le post). Celui ou celle qui publie retire son propre nom de la liste de l'équipe.
 
-Pièce jointe conseillée : `presentation/Maison-Test-reconnaissance-client.pdf`, publiée comme document LinkedIn (les diapositives défilent comme un carrousel). Sinon, une capture de la page Reconnaissance avec le visage pixélisé (`presentation/images/reconnaissance.png`).
+Pièce jointe conseillée : `presentation/Maison-Test-client-recognition.pdf` (version anglaise), publiée comme document LinkedIn (les diapositives défilent comme un carrousel). Sinon, une capture de la page Reconnaissance avec le visage pixélisé (`presentation/images/reconnaissance.png`).
 
 ---
 
 Peut-on reconnaître un client à l'entrée d'une boutique avec une simple webcam et un navigateur ? Techniquement, oui. C'est justement ce qui rend la question intéressante.
 
-Dans le cadre du cours [nom du cours] à Audencia, avec [prénoms de l'équipe], nous avons construit Maison Test : le prototype d'une boutique de luxe fictive où le conseiller voit la fiche du client dès qu'il entre dans le champ de la caméra. Préférences, derniers achats, et une phrase d'accueil du type « Bonjour Madame Test, un café glacé sans sucre, comme d'habitude ? ».
+Dans le cadre du cours [nom du cours] à Audencia, avec Rim Middi, Felix Chevalier, Jean-Baptiste Caron et Mathis Lacombe, nous avons construit Maison Test : le prototype d'une boutique de luxe fictive où le conseiller voit la fiche du client dès qu'il entre dans le champ de la caméra. Préférences, derniers achats, et une phrase d'accueil du type « Bonjour Madame Test, un café glacé sans sucre, comme d'habitude ? ».
 
 Ce que nous en retenons :
 

@@ -30,3 +30,4 @@ export const LARGEUR_MIN_ENROLEMENT = 120;
 
 // Clés de stockage navigateur.
 export const CLE_BASE = "maison-test/v1";
+export const CLE_MOTEUR = "maison-test/moteur"; // moteur choisi par ?moteur= (D-037)

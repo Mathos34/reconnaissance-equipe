@@ -11,24 +11,18 @@ const sharp = require("sharp");
 const QRCode = require("qrcode");
 const fa = require("react-icons/fa6");
 
-const RACINE = path.resolve(__dirname, "..");
 const IMAGES = path.join(__dirname, "images");
 const SORTIE = path.join(__dirname, "Maison-Test-reconnaissance-client.pptx");
-const URL_DEMO = "https://mathos34.github.io/reconnaissance-equipe/";
-const URL_DEPOT = "https://github.com/Mathos34/reconnaissance-equipe";
 const SKILL_THEME = process.env.APPLY_THEME;
 
-// ---------- données mesurées ----------
+// ---------- données mesurées (presentation/mesures.js) ----------
 
-const nav = JSON.parse(fs.readFileSync(path.join(RACINE, "evaluation/resultats/navigateur.json"), "utf8"));
-const rob = JSON.parse(fs.readFileSync(path.join(RACINE, "evaluation/resultats/robustesse.json"), "utf8"));
+const {
+  URL_DEMO, rob, M, MG, defaut, demo, demoHybride, enrolement,
+  taille, distanceFiable, distanceUtile, tauxUtile, limiteParDetection, auSeuil, PARITE, TESTS, POIDS_MO,
+} = require("./mesures");
+const nomDemo = demoHybride ? "hybride, GPU dédié" : "processeur (WASM)";
 
-const mediane = (valeurs) => {
-  const v = valeurs.filter((x) => x !== null && x !== undefined).sort((a, b) => a - b);
-  if (!v.length) return null;
-  const m = Math.floor(v.length / 2);
-  return v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2;
-};
 const fr = (v, d = 0) => (v === null || v === undefined ? "-" : v.toLocaleString("fr-FR", { minimumFractionDigits: d, maximumFractionDigits: d }));
 const frCourt = (v) => v.toLocaleString("fr-FR", { maximumFractionDigits: 2 }); // 0,15 et non 0,2
 
@@ -41,48 +35,6 @@ const insecables = (t) =>
     .replace(/ ([:;?!])/g, " $1");
 const typographier = (contenu) =>
   typeof contenu === "string" ? insecables(contenu) : contenu.map((run) => ({ ...run, text: insecables(run.text) }));
-
-function moteur(nom, source = nav) {
-  const s = source?.moteurs?.[nom]?.sessions ?? [];
-  if (!s.length) return null;
-  return {
-    sessions: s.length,
-    pre: mediane(s.map((x) => x.latenceMs.pretraitement.p50)),
-    det: mediane(s.map((x) => x.latenceMs.inference.p50)),
-    emb: mediane(s.map((x) => x.latenceMs.embedding.p50)),
-    tot: mediane(s.map((x) => x.latenceMs.totale.p50)),
-    p95: mediane(s.map((x) => x.latenceMs.totale.p95)),
-    fps: mediane(s.map((x) => x.fpsMoyen)),
-    analyses: mediane(s.map((x) => x.analysesParSeconde)),
-    delai: mediane(s.map((x) => x.delaiReconnaissanceMs.p50)),
-    chargement: mediane(s.map((x) => x.chargementMs)),
-  };
-}
-const M = { wasm: moteur("wasm"), webgpu: moteur("webgpu"), hybride: moteur("hybride") ?? moteur("auto") };
-// Mesures avec le GPU dédié (RTX 3060) activé pour le navigateur, si elles existent.
-const fichierGpu = path.join(RACINE, "evaluation/resultats/navigateur_gpu_dedie.json");
-const navGpu = fs.existsSync(fichierGpu) ? JSON.parse(fs.readFileSync(fichierGpu, "utf8")) : null;
-const MG = navGpu ? { webgpu: moteur("webgpu", navGpu), hybride: moteur("hybride", navGpu) ?? moteur("auto", navGpu) } : {};
-const defaut = M.wasm; // moteur par défaut du site (docs/DECISIONS.md, D-037)
-// Réglage du PC de démo : hybride sur GPU dédié s'il a été mesuré plus rapide, sinon le défaut.
-const demo = MG.hybride && MG.hybride.tot < defaut.tot ? MG.hybride : defaut;
-const nomDemo = demo === MG.hybride ? "hybride, GPU dédié" : "processeur (WASM)";
-const enrolement = nav.enrolements[nav.enrolements.length - 1];
-const inconnus = nav.inconnu ?? [];
-const faussesInconnus = inconnus.reduce((t, s) => t + s.pistesReconnues, 0);
-const similariteInconnu = mediane(inconnus.map((s) => s.scores.moyenne));
-
-const taille = rob.conditions.taille.niveaux;
-const distanceFiable = Math.max(...taille.filter((n) => n.identification === 100).map((n) => n.distanceEstimeeM));
-const distanceUtile = Math.max(...taille.filter((n) => n.identification >= 80).map((n) => n.distanceEstimeeM));
-const tauxUtile = taille.find((n) => n.distanceEstimeeM === distanceUtile).identification;
-// Si chaque visage détecté a été bien identifié, la distance utile est limitée par la détection.
-const limiteParDetection = taille.every((n) => n.detection === n.identification);
-const auSeuil = rob.auSeuil;
-
-const PARITE = { ecartPx: 0.17, cosinus: 0.9985 }; // site/tests/parite.test.mjs (6 visages sur 6)
-const TESTS = { js: 45, python: 88, e2e: 1 };
-const POIDS_MO = 15.4;
 
 // ---------- thème ----------
 

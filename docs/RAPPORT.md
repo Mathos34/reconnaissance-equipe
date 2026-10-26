@@ -33,7 +33,7 @@ Enrôlement mesuré : 18,7 s pour 25 images valides.
 
 **Publication :** dépôt public, site publié par GitHub Actions après les tests. Les modèles InsightFace (usage non commercial, D-021) sont versionnés, ce qui suppose un usage de test sans diffusion commerciale (D-033).
 
-**Présentation :** `presentation/` génère le support (17 diapositives, PowerPoint et PDF) à partir des résultats mesurés.
+**Présentation :** `presentation/` génère le support (17 diapositives, PowerPoint et PDF, en anglais et en français) à partir des résultats mesurés. Équipe : Rim Middi, Felix Chevalier, Jean-Baptiste Caron, Mathis Lacombe.
 
 ## Version Python locale (archive)
 
@@ -69,10 +69,10 @@ Le détail est dans `docs/BENCH.md`. La variance entre passages est forte (19,6 
 
 ## Ce qui reste à faire avant la présentation
 
-1. Sur le PC de démo : régler Microsoft Edge sur « Hautes performances » (Paramètres, Affichage, Graphiques), ouvrir le site avec `?moteur=hybride`.
-2. Enrôler les membres de l'équipe qui joueront les clients, avec l'éclairage de la salle, et garder un export JSON de secours.
+1. ~~Sur le PC de démo : régler Microsoft Edge sur « Hautes performances »~~ : fait le 26 octobre (préférence GPU de Windows), Edge expose bien la RTX 3060 au site. Le choix `?moteur=hybride` est mémorisé par le navigateur : l'ouvrir une fois suffit.
+2. Enrôler les membres de l'équipe qui joueront les clients, dans la salle et avec son éclairage, puis garder un export JSON de secours.
 3. Vérifier le seuil 0,35 en direct : la similarité de chaque client et d'une personne non enregistrée s'affiche dans les indicateurs.
-4. Répéter la démo de 4 minutes (diapositive 10 du support) et compléter les noms de l'équipe sur la diapositive de titre.
+4. Répéter la démo de 4 minutes (diapositive 10 du support).
 
 ## Points à signaler
 

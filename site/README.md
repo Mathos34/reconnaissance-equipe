@@ -18,7 +18,7 @@ Le moteur se choisit par le paramètre d'URL `moteur` :
 | `index.html?moteur=webgpu` | WebGPU | WebGPU |
 | `index.html?moteur=hybride` | WebGPU | WASM |
 
-Le choix par défaut vient des mesures (`docs/DECISIONS.md`, D-037).
+Le choix par défaut vient des mesures (`docs/DECISIONS.md`, D-037). Un choix fait par l'adresse est mémorisé (clé `localStorage` `maison-test/moteur`) et vaut pour toutes les pages de l'appareil ; `?moteur=wasm` l'efface.
 
 ## Données
 

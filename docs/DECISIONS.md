@@ -256,7 +256,7 @@ Hybride : détection en WebGPU, reconnaissance en WASM. Dans la même série que
 - La reconnaissance (MobileFaceNet) est 3 à 4 fois plus lente en WebGPU qu'en WASM, quelle que soit la carte : une partie des opérations du modèle n'est probablement pas prise en charge par WebGPU.
 - La détection n'accélère qu'avec la carte dédiée.
 
-**Décision.** WASM par défaut : c'est le seul réglage qui n'est jamais pire, quel que soit le poste du visiteur. `?moteur=hybride` et `?moteur=webgpu` forcent les autres modes, avec retour à WASM en cas d'échec. Le PC de démo utilise `?moteur=hybride` après le réglage Windows, soit 108 ms par analyse et 0,20 s avant la fiche.
+**Décision.** WASM par défaut : c'est le seul réglage qui n'est jamais pire, quel que soit le poste du visiteur. `?moteur=hybride` et `?moteur=webgpu` forcent les autres modes, avec retour à WASM en cas d'échec. Le choix est mémorisé dans le navigateur (`maison-test/moteur`), car les liens entre pages ne portent pas le paramètre : sans cela, la page Reconnaissance repassait en WASM après l'enrôlement. `?moteur=wasm` l'efface. Le PC de démo utilise `?moteur=hybride` après le réglage Windows, soit 108 ms par analyse et 0,20 s avant la fiche.
 
 **Note.** Dans les fichiers de résultats, la clé `auto` désigne les sessions mesurées avant l'ajout de `?moteur=` ; leur fournisseur enregistré est `hybride`.
 

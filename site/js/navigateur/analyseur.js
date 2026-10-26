@@ -2,6 +2,7 @@
 // Les images restent sur l'appareil : aucune requête n'envoie de photo ailleurs.
 
 import {
+  CLE_MOTEUR,
   SEUIL_DETECTION,
   SEUIL_NMS,
   TAILLE_DETECTION,
@@ -18,12 +19,27 @@ const WEBGPU = { nom: "webgpu", detection: ["webgpu"], reconnaissance: ["webgpu"
 const HYBRIDE = { nom: "hybride", detection: ["webgpu"], reconnaissance: ["wasm"] };
 
 /**
+ * Moteur demandé par ?moteur= dans l'adresse. Le choix est mémorisé sur l'appareil, pour que les liens entre
+ * pages (sans paramètre) le gardent ; ?moteur=wasm l'oublie.
+ */
+function moteurDemande() {
+  const parametre = new URLSearchParams(globalThis.location?.search ?? "").get("moteur");
+  try {
+    if (parametre === "webgpu" || parametre === "hybride") globalThis.localStorage.setItem(CLE_MOTEUR, parametre);
+    else if (parametre === "wasm") globalThis.localStorage.removeItem(CLE_MOTEUR);
+    return parametre ?? globalThis.localStorage.getItem(CLE_MOTEUR);
+  } catch {
+    return parametre; // stockage bloqué (navigation privée) : le paramètre ne vaut que pour la page
+  }
+}
+
+/**
  * Plans de chargement à essayer dans l'ordre. Par défaut : WASM, le plus rapide et le plus régulier mesuré
- * sur le GPU que le navigateur choisit seul (docs/DECISIONS.md, D-037). Le paramètre d'URL
- * ?moteur=webgpu ou ?moteur=hybride sert aux machines dont le GPU dédié est activé pour le navigateur.
+ * sur le GPU que le navigateur choisit seul (docs/DECISIONS.md, D-037). ?moteur=webgpu ou ?moteur=hybride
+ * sert aux machines dont le GPU dédié est activé pour le navigateur.
  */
 function plansDeChargement() {
-  const force = new URLSearchParams(globalThis.location?.search ?? "").get("moteur");
+  const force = moteurDemande();
   if (force === "webgpu") return [WEBGPU, WASM];
   if (force === "hybride") return [HYBRIDE, WASM];
   return [WASM];
