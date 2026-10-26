@@ -1,20 +1,24 @@
-// Page Reconnaissance : flux caméra, cadre sur chaque visage, fiche du client reconnu à droite.
+// Page Reconnaissance : flux caméra, cadre sur chaque visage, fiche du client reconnu,
+// et indicateurs en direct (fps, latence, délai avant reconnaissance, similarité, moteur).
 
-import { CLE_BASE, K_DETECTION, NOM_BOUTIQUE, SEUIL } from "../config.js";
+import { CLE_BASE, K_DETECTION, SEUIL } from "../config.js";
 import { Base } from "../coeur/base.js";
 import { Galerie } from "../coeur/gabarit.js";
+import { JournalIndicateurs, MesuresReconnaissance } from "../coeur/indicateurs.js";
 import { Pipeline } from "../coeur/pipeline.js";
+import { suggerer, formaterDate, dateDepuisIso } from "../coeur/suggestion.js";
 import { formaterRendezVous, formaterMontant, $, notifier } from "../navigateur/commun.js";
 import { ouvrirCamera } from "../navigateur/camera.js";
 import { Analyseur } from "../navigateur/analyseur.js";
 import { choisirStockage } from "../navigateur/stockage.js";
-import { suggerer, formaterDate, dateDepuisIso } from "../coeur/suggestion.js";
 
 const COULEUR_CONNU = "#3f7a9a";
 const COULEUR_INCONNU = "#8c8c8c";
+const RAFRAICHISSEMENT_INDICATEURS_MS = 250;
 
 const { stockage } = choisirStockage();
 const base = new Base(stockage, CLE_BASE);
+const journal = new JournalIndicateurs(stockage);
 
 const video = $("#video");
 const canevas = $("#superposition");
@@ -24,29 +28,38 @@ const etat = {
   analyseur: null,
   arreterCamera: null,
   pipeline: null,
-  active: false,
+  mesures: null,
+  session: 0, // jeton : une seule boucle active à la fois, même après un arrêt suivi d'un redémarrage
   masquee: false,
   dernierCle: null,
   affichages: [],
+  fiches: new Map(), // cache des fiches, pour ne pas relire localStorage à chaque image
+  dernierRafraichissement: 0,
 };
 
-// ---------- base et galerie ----------
+const virgule = (nombre, decimales) => nombre.toFixed(decimales).replace(".", ",");
+
+// ---------- base, cache et galerie ----------
+
+function rechargerFiches() {
+  etat.fiches = new Map(base.lister().map((c) => [c.identifiant, c.fiche]));
+}
 
 function chargerGalerie() {
   return new Galerie(base.entreesGalerie());
 }
 
 function rafraichirAccueil() {
-  const nombre = base.identifiants().length;
   $("#sous-accueil").textContent =
-    nombre === 0
+    etat.fiches.size === 0
       ? "Aucun client enregistré pour l'instant. Ajoutez-en depuis la page Clients."
       : "Un instant, nous préparons votre accueil.";
 }
 
-// Quand la page Clients modifie la base (autre onglet ou même site), on recharge la galerie.
+// Quand la page Clients modifie la base (autre onglet du même site), on recharge fiches et galerie.
 window.addEventListener("storage", (evenement) => {
   if (evenement.key !== CLE_BASE) return;
+  rechargerFiches();
   etat.pipeline?.changerGalerie(chargerGalerie());
   rafraichirAccueil();
   etat.dernierCle = null;
@@ -55,7 +68,7 @@ window.addEventListener("storage", (evenement) => {
 // ---------- affichage de la fiche ----------
 
 function personnePrincipale(affichages) {
-  const connus = affichages.filter((a) => a.identifiant !== null && base.obtenir(a.identifiant));
+  const connus = affichages.filter((a) => a.identifiant !== null && etat.fiches.has(a.identifiant));
   if (connus.length === 0) return null;
   const aire = (a) => (a.boite[2] - a.boite[0]) * (a.boite[3] - a.boite[1]);
   return connus.reduce((meilleur, a) => (aire(a) > aire(meilleur) ? a : meilleur));
@@ -91,11 +104,10 @@ function rendreFiche(fiche, suggestion) {
 
 function mettreAJourFiche(affichages) {
   const personne = personnePrincipale(affichages);
-  const maintenant = new Date();
   let cle = "aucune";
   if (personne) {
-    const fiche = base.obtenir(personne.identifiant).fiche;
-    const suggestion = suggerer(fiche, maintenant);
+    const fiche = etat.fiches.get(personne.identifiant);
+    const suggestion = suggerer(fiche, new Date());
     cle = `${personne.identifiant}|${suggestion.moment}|${suggestion.accroche}`;
     if (cle !== etat.dernierCle) rendreFiche(fiche, suggestion);
   }
@@ -110,6 +122,7 @@ function mettreAJourFiche(affichages) {
 $("#bascule").addEventListener("click", () => {
   etat.masquee = !etat.masquee;
   $("#bascule").textContent = etat.masquee ? "Afficher la fiche" : "Masquer la fiche";
+  $("#bascule").setAttribute("aria-pressed", String(etat.masquee));
   etat.dernierCle = null;
   mettreAJourFiche(etat.affichages);
 });
@@ -131,9 +144,9 @@ function dessinerSuperposition(affichages) {
   ctx.textBaseline = "top";
   for (const a of affichages) {
     const [x1, y1, x2, y2] = a.boite;
-    const connu = a.identifiant !== null && base.obtenir(a.identifiant);
-    const couleur = connu ? COULEUR_CONNU : COULEUR_INCONNU;
-    const libelle = connu ? `${connu.fiche.prenom} ${connu.fiche.nom}` : "Inconnu";
+    const fiche = a.identifiant !== null ? etat.fiches.get(a.identifiant) : null;
+    const couleur = fiche ? COULEUR_CONNU : COULEUR_INCONNU;
+    const libelle = fiche ? `${fiche.prenom} ${fiche.nom}` : "Inconnu";
     ctx.strokeStyle = couleur;
     ctx.lineWidth = epaisseur;
     ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
@@ -146,41 +159,65 @@ function dessinerSuperposition(affichages) {
   }
 }
 
+// ---------- indicateurs en direct ----------
+
+function afficherIndicateurs(affichages, instant) {
+  if (!etat.mesures || instant - etat.dernierRafraichissement < RAFRAICHISSEMENT_INDICATEURS_MS) return;
+  etat.dernierRafraichissement = instant;
+  const m = etat.mesures;
+  const latence = m.derniereLatence();
+  const delai = m.dernierDelai();
+  const meilleure = affichages.reduce((max, a) => Math.max(max, a.score), -Infinity);
+  $("#kpi-fps").textContent = virgule(m.fpsRecent(), 1);
+  $("#kpi-analyses").textContent = virgule(m.analysesRecentes(), 1);
+  $("#kpi-latence").textContent = latence === null ? "-" : String(Math.round(latence));
+  $("#kpi-delai").textContent = delai === null ? "-" : virgule(delai / 1000, 1);
+  $("#kpi-similarite").textContent = Number.isFinite(meilleure) ? virgule(meilleure, 2) : "-";
+}
+
+function enregistrerSession() {
+  if (!etat.mesures) return;
+  const resume = etat.mesures.resume(performance.now());
+  if (resume.detections > 0) journal.ajouter(resume);
+  etat.mesures = null;
+}
+
 // ---------- boucle de reconnaissance ----------
 
-// Fenêtre glissante des 30 dernières images, pour un fps stable.
-let images = [];
-function mesureFps(maintenant) {
-  images.push(maintenant);
-  if (images.length > 30) images.shift();
-  if (images.length < 2) return 0;
-  return (images.length - 1) / ((images[images.length - 1] - images[0]) / 1000);
-}
-
-function afficherStatistiques(affichages, fps) {
-  const meilleure = affichages.reduce((m, a) => Math.max(m, a.score), -Infinity);
-  $("#fps").textContent = `${fps.toFixed(1)} fps`;
-  $("#similarite").textContent = Number.isFinite(meilleure) ? `Similarité : ${meilleure.toFixed(2).replace(".", ",")}` : "Similarité : -";
-}
-
-async function boucle() {
-  if (!etat.active) return;
+async function boucle(session) {
+  if (session !== etat.session) return;
   if (video.readyState >= 2 && video.videoWidth > 0) {
     try {
-      const affichages = await etat.pipeline.traiterImage(() =>
-        etat.analyseur.analyser(video, video.videoWidth, video.videoHeight, { embeddings: true }),
-      );
+      let detectionFaite = false;
+      const affichages = await etat.pipeline.traiterImage(async () => {
+        const visages = await etat.analyseur.analyser(video, video.videoWidth, video.videoHeight, { embeddings: true });
+        const d = etat.analyseur.dernieresDurees;
+        etat.mesures?.detection({
+          pretraitementMs: d.lectureMs + d.pretraitementMs,
+          inferenceMs: d.inferenceMs,
+          embeddingMs: d.embeddingMs,
+          visages: visages.length,
+          instant: performance.now(),
+        });
+        detectionFaite = true;
+        return visages;
+      });
+      if (session !== etat.session) return; // arrêt pendant l'analyse : on ne dessine plus rien
+      const instant = performance.now();
+      if (detectionFaite) etat.mesures?.decisions(etat.pipeline.derniersResultats());
+      etat.mesures?.image(instant);
+      etat.mesures?.observer(affichages, instant);
       etat.affichages = affichages;
       dessinerSuperposition(affichages);
       mettreAJourFiche(affichages);
-      afficherStatistiques(affichages, mesureFps(performance.now()));
+      afficherIndicateurs(affichages, instant);
     } catch (erreur) {
       notifier(`Analyse interrompue : ${erreur.message}`, "erreur");
       arreter();
       return;
     }
   }
-  requestAnimationFrame(boucle);
+  requestAnimationFrame(() => boucle(session));
 }
 
 // ---------- démarrage et arrêt ----------
@@ -194,21 +231,31 @@ async function demarrer() {
   bouton.disabled = true;
   try {
     statut("Démarrage de la caméra...");
-    etat.arreterCamera = await ouvrirCamera(video);
+    etat.arreterCamera = await ouvrirCamera(video, {
+      surFin: () => {
+        if (!etat.arreterCamera) return;
+        arreter();
+        notifier("La caméra s'est arrêtée (débranchée ou utilisée ailleurs).", "erreur");
+      },
+    });
     if (!etat.analyseur) {
       etat.analyseur = await Analyseur.charger({ onProgression: statut });
     }
-    etat.pipeline = new Pipeline({
-      galerie: chargerGalerie(),
+    rechargerFiches();
+    etat.pipeline = new Pipeline({ galerie: chargerGalerie(), seuil: SEUIL, k: K_DETECTION });
+    etat.mesures = new MesuresReconnaissance({
+      fournisseur: etat.analyseur.fournisseur,
+      chargementMs: etat.analyseur.chargementMs,
+      debut: performance.now(),
       seuil: SEUIL,
-      k: K_DETECTION,
     });
-    $("#seuil").textContent = `Seuil : ${SEUIL.toFixed(2).replace(".", ",")}`;
+    etat.dernierCle = null;
+    $("#kpi-moteur").textContent = { webgpu: "WebGPU", hybride: "WebGPU + WASM", wasm: "WASM" }[etat.analyseur.fournisseur] ?? etat.analyseur.fournisseur;
     $("#vide-camera").hidden = true;
     $("#arreter").hidden = false;
-    etat.active = true;
-    images = [];
-    requestAnimationFrame(boucle);
+    $("#arreter").focus();
+    const session = ++etat.session;
+    requestAnimationFrame(() => boucle(session));
   } catch (erreur) {
     statut(erreur.message);
     notifier(erreur.message, "erreur");
@@ -220,18 +267,27 @@ async function demarrer() {
 }
 
 function arreter() {
-  etat.active = false;
+  etat.session += 1; // invalide la boucle en cours
+  enregistrerSession();
   etat.arreterCamera?.();
   etat.arreterCamera = null;
+  etat.affichages = [];
+  etat.dernierCle = null;
+  mettreAJourFiche([]);
   $("#arreter").hidden = true;
   $("#vide-camera").hidden = false;
-  statut("Caméra arrêtée. Redémarrez-la pour reconnaître à nouveau.");
+  statut("Caméra arrêtée. Les indicateurs de la session sont dans la page Indicateurs.");
   ctx.clearRect(0, 0, canevas.width, canevas.height);
+  $("#demarrer").focus();
 }
 
 $("#demarrer").addEventListener("click", demarrer);
 $("#arreter").addEventListener("click", arreter);
+// Fermeture ou changement de page : la session en cours est enregistrée dans le journal.
+window.addEventListener("pagehide", enregistrerSession);
 
 // Premier affichage : état de la base.
+rechargerFiches();
 rafraichirAccueil();
-if (!base.identifiants().length) statut("Aucun client enregistré : ajoutez-en depuis la page Clients.");
+$("#libelle-similarite").textContent = `Similarité (seuil ${virgule(SEUIL, 2)})`;
+if (etat.fiches.size === 0) statut("Aucun client enregistré : ajoutez-en depuis la page Clients.");

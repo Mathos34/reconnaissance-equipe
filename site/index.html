@@ -14,6 +14,7 @@
     <nav class="navigation" aria-label="Pages">
       <a href="index.html" aria-current="page">Reconnaissance</a>
       <a href="clients.html">Clients</a>
+      <a href="indicateurs.html">Indicateurs</a>
     </nav>
   </header>
 
@@ -29,16 +30,21 @@
         </div>
       </div>
       <div class="barre-info">
-        <span id="fps">- fps</span>
-        <span id="similarite">Similarité : -</span>
-        <span id="seuil">Seuil : -</span>
+        <dl class="indicateurs-direct" aria-label="Indicateurs en direct" aria-live="off">
+          <div class="kpi"><dt>Images par seconde</dt><dd id="kpi-fps">-</dd></div>
+          <div class="kpi"><dt>Analyse (ms)</dt><dd id="kpi-latence">-</dd></div>
+          <div class="kpi"><dt>Reconnu en (s)</dt><dd id="kpi-delai">-</dd></div>
+          <div class="kpi"><dt>Analyses par seconde</dt><dd id="kpi-analyses">-</dd></div>
+          <div class="kpi"><dt id="libelle-similarite">Similarité</dt><dd id="kpi-similarite">-</dd></div>
+          <div class="kpi"><dt>Moteur</dt><dd id="kpi-moteur">-</dd></div>
+        </dl>
         <button id="arreter" class="bouton discret" type="button" hidden>Arrêter</button>
       </div>
     </section>
 
     <aside class="carte carte-fiche" aria-label="Fiche client">
       <div class="barre-fiche">
-        <button id="bascule" class="bouton discret" type="button">Masquer la fiche</button>
+        <button id="bascule" class="bouton discret" type="button" aria-pressed="false">Masquer la fiche</button>
       </div>
 
       <div id="accueil-fiche" class="accueil">

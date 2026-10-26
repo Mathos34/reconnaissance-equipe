@@ -6,7 +6,8 @@ Parcours :
 3. Page Reconnaissance : la personne enregistrée est reconnue et sa fiche s'affiche.
 4. Profil vierge : import de la sauvegarde, puis un visage inconnu reste « Inconnu ».
 
-Prérequis (non versionnés, ils contiennent des images) :
+Prérequis : les vidéos de caméra simulée, régénérées par `python evaluation/preparer_donnees.py`
+(evaluation/donnees/, non versionné). On peut les remplacer par :
 - MT_VIDEO_ENREGISTREMENT : vidéo YUV4MPEG2 d'un visage isolé, utilisée pour l'inscription et la reconnaissance ;
 - MT_VIDEO_INCONNU : vidéo YUV4MPEG2 d'un autre visage ;
 - MT_EDGE (facultatif) : chemin de msedge.exe, par défaut l'installation Windows standard.
@@ -26,6 +27,7 @@ import time
 from playwright.sync_api import expect, sync_playwright
 
 SITE = pathlib.Path(__file__).resolve().parents[2]
+DONNEES = SITE.parent / "evaluation" / "donnees"
 PORT = int(os.environ.get("MT_PORT", "8791"))
 # Par défaut : serveur local sur le dossier site/. MT_URL permet de tester le site publié.
 URL_PUBLIEE = os.environ.get("MT_URL")
@@ -58,6 +60,8 @@ def nouvelle_page(navigateur, erreurs: list[str]):
 
 def inscrire_claire(page):
     page.goto(f"{URL}/clients.html")
+    expect(page.locator("#activer")).to_be_disabled()  # pas de capture sans consentement
+    page.fill("#consentement", "J'ACCEPTE")
     page.click("#activer")
     expect(page.locator("#compte")).to_have_text("25", timeout=TIMEOUT_CAPTURE)
 
@@ -72,7 +76,6 @@ def inscrire_claire(page):
     page.select_option("select[name=lait]", "lait d'amande")
 
     page.click("#etapes li[data-etape='3'] button")
-    page.fill("#consentement", "J'ACCEPTE")
     expect(page.locator("#enregistrer")).to_be_enabled()
     page.click("#enregistrer")
     expect(page.locator("#titre-editeur")).to_have_text("Claire Test")
@@ -94,8 +97,12 @@ def reconnaitre_claire(page):
 
 
 def main() -> int:
-    video_claire = os.environ["MT_VIDEO_ENREGISTREMENT"]
-    video_inconnu = os.environ["MT_VIDEO_INCONNU"]
+    video_claire = os.environ.get("MT_VIDEO_ENREGISTREMENT", str(DONNEES / "camera_enregistrement.y4m"))
+    video_inconnu = os.environ.get("MT_VIDEO_INCONNU", str(DONNEES / "camera_inconnu.y4m"))
+    for video in (video_claire, video_inconnu):
+        if not pathlib.Path(video).exists():
+            print(f"Vidéo absente : {video}. Lancer d'abord : python evaluation/preparer_donnees.py")
+            return 2
     erreurs: list[str] = []
     dossier = pathlib.Path(tempfile.mkdtemp(prefix="maison-test-e2e-"))
     sauvegarde = dossier / "sauvegarde.json"
@@ -130,12 +137,12 @@ def main() -> int:
 
             page.goto(f"{URL}/index.html")
             page.click("#demarrer")
-            expect(page.locator("#similarite")).not_to_have_text("Similarité : -", timeout=TIMEOUT_CAPTURE)
+            expect(page.locator("#kpi-similarite")).not_to_have_text("-", timeout=TIMEOUT_CAPTURE)
             time.sleep(4)
             expect(page.locator("#fiche")).to_be_hidden()
             expect(page.locator("#accueil-fiche")).to_be_visible()
-            similarite = page.locator("#similarite").inner_text()
-            print(f"ok : visage inconnu, pas de fiche affichée ({similarite})")
+            similarite = page.locator("#kpi-similarite").inner_text()
+            print(f"ok : visage inconnu, pas de fiche affichée (similarité {similarite})")
             navigateur.close()
     finally:
         if serveur is not None:

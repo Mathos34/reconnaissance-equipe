@@ -1,9 +1,9 @@
 // Test de parité : le pipeline JavaScript doit retrouver les mêmes visages et embeddings que InsightFace (Python).
-// Activé seulement si PARITE_IMAGE (image JPEG) et PARITE_REFERENCE (JSON produit par InsightFace) sont définis.
+// Activé si la référence existe : evaluation/donnees/reference_parite.json, ou PARITE_REFERENCE et PARITE_IMAGE.
 // Ni l'image ni la référence ne sont versionnées : elles viennent d'un jeu d'exemple fourni avec InsightFace.
 
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { test } from "node:test";
@@ -19,8 +19,10 @@ import { decoderScrfd } from "../js/coeur/scrfd.js";
 
 const ici = dirname(fileURLToPath(import.meta.url));
 const dossierModeles = join(ici, "..", "models");
-const imagePath = process.env.PARITE_IMAGE;
-const referencePath = process.env.PARITE_REFERENCE;
+// Par défaut : référence produite par `python evaluation/preparer_donnees.py` (evaluation/donnees/, non versionné).
+const referenceParDefaut = join(ici, "..", "..", "evaluation", "donnees", "reference_parite.json");
+const referencePath = process.env.PARITE_REFERENCE ?? (existsSync(referenceParDefaut) ? referenceParDefaut : undefined);
+const imagePath = process.env.PARITE_IMAGE ?? (referencePath ? JSON.parse(readFileSync(referencePath, "utf8")).image : undefined);
 
 test("parité avec InsightFace : mêmes visages, mêmes embeddings", { skip: !imagePath || !referencePath }, async () => {
   const reference = JSON.parse(readFileSync(referencePath, "utf8"));

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <title>Maison Test : indicateurs</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body class="page-indicateurs">
+  <header class="bandeau">
+    <a class="marque" href="index.html">Maison Test</a>
+    <nav class="navigation" aria-label="Pages">
+      <a href="index.html">Reconnaissance</a>
+      <a href="clients.html">Clients</a>
+      <a href="indicateurs.html" aria-current="page">Indicateurs</a>
+    </nav>
+  </header>
+
+  <main class="tableau-de-bord">
+    <header class="entete-tableau">
+      <div>
+        <h1 class="titre-section">Indicateurs</h1>
+        <p class="discret" id="perimetre">Mesures enregistrées par ce navigateur.</p>
+      </div>
+      <div class="ligne-boutons">
+        <button id="exporter" class="bouton discret petit" type="button">Exporter les mesures</button>
+        <button id="effacer" class="bouton discret petit" type="button">Effacer l'historique</button>
+      </div>
+    </header>
+
+    <section aria-labelledby="titre-synthese">
+      <h2 class="sous-titre" id="titre-synthese">Synthèse</h2>
+      <dl class="tuiles" id="tuiles"></dl>
+    </section>
+
+    <section class="grille-graphiques" aria-label="Graphiques">
+      <article class="carte graphique-carte">
+        <h3>Temps d'analyse par étape</h3>
+        <p class="discret">Médiane par session, en millisecondes. Une analyse a lieu toutes les 3 images.</p>
+        <div id="g-latence"></div>
+      </article>
+      <article class="carte graphique-carte">
+        <h3>Images affichées par seconde</h3>
+        <p class="discret">Médiane par session. L'objectif est d'au moins 10 images par seconde.</p>
+        <div id="g-fps"></div>
+      </article>
+      <article class="carte graphique-carte">
+        <h3>Délai avant reconnaissance</h3>
+        <p class="discret">Temps entre l'apparition d'un visage et l'affichage de sa fiche, médiane par session, en secondes.</p>
+        <div id="g-delai"></div>
+      </article>
+      <article class="carte graphique-carte">
+        <h3>Distribution des similarités</h3>
+        <p class="discret">Meilleur score de chaque visage analysé, toutes sessions. Au-dessus du seuil, le visage est attribué à un client.</p>
+        <div id="g-scores"></div>
+      </article>
+      <article class="carte graphique-carte">
+        <h3>Images analysées à l'enrôlement</h3>
+        <p class="discret">Toutes les captures enregistrées : images retenues et motifs de refus.</p>
+        <div id="g-enrolement"></div>
+      </article>
+      <article class="carte graphique-carte">
+        <h3>Boissons préférées</h3>
+        <p class="discret">Nombre de clients par boisson, d'après les fiches.</p>
+        <div id="g-boissons"></div>
+      </article>
+    </section>
+  </main>
+
+  <div id="notifications" class="notifications" aria-live="polite"></div>
+  <script type="module" src="js/pages/indicateurs.js"></script>
+</body>
+</html>

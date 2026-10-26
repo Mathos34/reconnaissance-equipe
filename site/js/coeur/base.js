@@ -78,6 +78,9 @@ export class Base {
     validerFiche(fiche);
     const etat = this._charger();
     const existant = etat.clients[fiche.identifiant];
+    if (gabarit !== null && !(consentement ?? existant?.consentement)) {
+      throw new Error("Un visage ne peut pas être enregistré sans consentement (J'ACCEPTE)");
+    }
     etat.clients[fiche.identifiant] = {
       fiche: structuredClone(fiche),
       gabarit: gabarit !== null ? Array.from(normaliser(gabarit)) : existant ? existant.gabarit : null,
@@ -151,8 +154,13 @@ export class Base {
       if (erreurs.length > 0) throw new Error(`Client ${c.fiche?.identifiant ?? "?"} : ${erreurs[0].message}`);
       if (vus.has(c.fiche.identifiant)) throw new Error(`Identifiant en double : ${c.fiche.identifiant}`);
       vus.add(c.fiche.identifiant);
-      if (c.gabarit !== null && (!Array.isArray(c.gabarit) || c.gabarit.length !== 512)) {
-        throw new Error(`Client ${c.fiche.identifiant} : gabarit invalide`);
+      if (c.gabarit !== null && c.gabarit !== undefined) {
+        const valide = Array.isArray(c.gabarit) && c.gabarit.length === 512 && c.gabarit.every(Number.isFinite) && c.gabarit.some((v) => v !== 0);
+        if (!valide) throw new Error(`Client ${c.fiche.identifiant} : gabarit invalide`);
+        // Pas de gabarit sans consentement daté (D-023).
+        if (!c.consentement?.date || !c.consentement?.mention) {
+          throw new Error(`Client ${c.fiche.identifiant} : gabarit sans consentement enregistré`);
+        }
       }
     }
 
@@ -165,7 +173,7 @@ export class Base {
       else ajoutes += 1;
       etat.clients[id] = {
         fiche: structuredClone(c.fiche),
-        gabarit: c.gabarit,
+        gabarit: c.gabarit ? Array.from(normaliser(c.gabarit)) : null,
         consentement: c.consentement ?? null,
         creeLe: c.creeLe ?? new Date().toISOString(),
         modifieLe: c.modifieLe ?? new Date().toISOString(),

@@ -13,34 +13,44 @@ import { alignerVisage } from "../coeur/geometrie.js";
 import { entreeDetection, entreeReconnaissance } from "../coeur/image.js";
 import { decoderScrfd } from "../coeur/scrfd.js";
 
-async function choisirFournisseurs() {
-  if (globalThis.navigator?.gpu) {
-    try {
-      const adaptateur = await navigator.gpu.requestAdapter();
-      if (adaptateur) return ["webgpu", "wasm"];
-    } catch {
-      // Pas de WebGPU utilisable : on passe au CPU (WASM).
-    }
+const WASM = { nom: "wasm", detection: ["wasm"], reconnaissance: ["wasm"] };
+const WEBGPU = { nom: "webgpu", detection: ["webgpu"], reconnaissance: ["webgpu"] };
+// Mesuré (docs/DECISIONS.md, D-037) : la détection est plus rapide en WebGPU (49 ms contre 69 ms),
+// la reconnaissance MobileFaceNet beaucoup plus lente (142 ms contre 37 ms). D'où le mode hybride.
+const HYBRIDE = { nom: "hybride", detection: ["webgpu"], reconnaissance: ["wasm"] };
+
+async function webgpuDisponible() {
+  if (!globalThis.navigator?.gpu) return false;
+  try {
+    return Boolean(await navigator.gpu.requestAdapter());
+  } catch {
+    return false;
   }
-  return ["wasm"];
 }
 
-/** Copie une source (vidéo, image, bitmap) dans un canevas et renvoie ses pixels RGBA. */
-function lirePixels(source, largeur, hauteur) {
-  const canevas = document.createElement("canvas");
-  canevas.width = largeur;
-  canevas.height = hauteur;
-  const ctx = canevas.getContext("2d", { willReadFrequently: true });
-  ctx.drawImage(source, 0, 0, largeur, hauteur);
-  const { data } = ctx.getImageData(0, 0, largeur, hauteur);
-  return { width: largeur, height: hauteur, data, canevas };
+/**
+ * Plans de chargement à essayer dans l'ordre. Par défaut : hybride si WebGPU existe, sinon WASM.
+ * Le paramètre d'URL ?moteur=wasm ou ?moteur=webgpu force un moteur, pour comparer ou se replier en démo.
+ */
+async function plansDeChargement() {
+  const force = new URLSearchParams(globalThis.location?.search ?? "").get("moteur");
+  if (force === "wasm") return [WASM];
+  if (force === "webgpu") return [WEBGPU];
+  return (await webgpuDisponible()) ? [HYBRIDE, WASM] : [WASM];
 }
+
+const maintenant = () => performance.now();
 
 export class Analyseur {
-  constructor(detection, reconnaissance, fournisseur) {
+  constructor(detection, reconnaissance, fournisseur, chargementMs) {
     this._detection = detection;
     this._reconnaissance = reconnaissance;
     this.fournisseur = fournisseur;
+    this.chargementMs = chargementMs;
+    this._canevas = document.createElement("canvas");
+    this._ctx = this._canevas.getContext("2d", { willReadFrequently: true });
+    /** Durées de la dernière analyse, en ms, pour les indicateurs. */
+    this.dernieresDurees = { lectureMs: 0, pretraitementMs: 0, inferenceMs: 0, embeddingMs: 0 };
   }
 
   /**
@@ -48,33 +58,41 @@ export class Analyseur {
    * onProgression reçoit un texte court pour l'interface.
    */
   static async charger({ onProgression = () => {} } = {}) {
-    if (!globalThis.ort) {
+    const ort = globalThis.ort;
+    if (!ort) {
       throw new Error("ONNX Runtime n'a pas pu être chargé. Vérifiez la connexion Internet et rechargez la page.");
     }
-    globalThis.ort.env.wasm.numThreads = 1; // pas d'isolation d'origine croisée sur GitHub Pages
-    globalThis.ort.env.logLevel = "error"; // avertissements de placement des nœuds : sans intérêt pour l'utilisateur
-    const essais = [await choisirFournisseurs()];
-    if (essais[0][0] !== "wasm") essais.push(["wasm"]);
+    ort.env.wasm.numThreads = 1; // pas d'isolation d'origine croisée sur GitHub Pages
+    ort.env.logLevel = "error";
 
+    const debut = maintenant();
     let dernierErreur = null;
-    for (const fournisseurs of essais) {
+    for (const plan of await plansDeChargement()) {
+      let detection = null;
       try {
         onProgression("Chargement du détecteur de visages");
-        const detection = await globalThis.ort.InferenceSession.create(URL_MODELE_DETECTION, {
-          executionProviders: fournisseurs,
-          graphOptimizationLevel: "all",
-        });
+        detection = await ort.InferenceSession.create(URL_MODELE_DETECTION, { executionProviders: plan.detection, graphOptimizationLevel: "all" });
         onProgression("Chargement du modèle de reconnaissance");
-        const reconnaissance = await globalThis.ort.InferenceSession.create(URL_MODELE_RECONNAISSANCE, {
-          executionProviders: fournisseurs,
-          graphOptimizationLevel: "all",
-        });
-        return new Analyseur(detection, reconnaissance, fournisseurs[0]);
+        const reconnaissance = await ort.InferenceSession.create(URL_MODELE_RECONNAISSANCE, { executionProviders: plan.reconnaissance, graphOptimizationLevel: "all" });
+        return new Analyseur(detection, reconnaissance, plan.nom, maintenant() - debut);
       } catch (erreur) {
         dernierErreur = erreur;
+        await detection?.release?.();
       }
     }
     throw new Error(`Modèles indisponibles : ${dernierErreur?.message ?? "erreur inconnue"}`);
+  }
+
+  /** Copie une source (vidéo, image, bitmap) dans le canevas réutilisé et renvoie ses pixels RGBA. */
+  _lirePixels(source, largeur, hauteur) {
+    if (this._canevas.width !== largeur || this._canevas.height !== hauteur) {
+      this._canevas.width = largeur;
+      this._canevas.height = hauteur;
+    }
+    this._ctx.drawImage(source, 0, 0, largeur, hauteur);
+    const { data } = this._ctx.getImageData(0, 0, largeur, hauteur);
+    this._ctx.clearRect(0, 0, largeur, hauteur); // aucune image ne reste dans le canevas (D-022)
+    return { width: largeur, height: hauteur, data };
   }
 
   /**
@@ -82,21 +100,29 @@ export class Analyseur {
    * Renvoie [{boite, score, kps, embedding}] en coordonnées de la source.
    */
   async analyser(source, largeur, hauteur, { embeddings = true } = {}) {
-    const image = lirePixels(source, largeur, hauteur);
-    const visages = await this._detecter(image);
-    if (!embeddings) return visages.map(({ boite, score, kps }) => ({ boite, score, kps }));
-    const resultat = [];
-    for (const visage of visages) {
-      const alignement = alignerVisage(image, visage.kps, 112);
-      const embedding = await this._plonger(alignement);
-      resultat.push({ ...visage, embedding });
+    const t0 = maintenant();
+    const image = this._lirePixels(source, largeur, hauteur);
+    const t1 = maintenant();
+    const { entree, echelle } = entreeDetection(image, TAILLE_DETECTION);
+    const t2 = maintenant();
+    const visages = await this._detecter(entree, echelle);
+    const t3 = maintenant();
+
+    let resultat = visages;
+    if (embeddings) {
+      resultat = [];
+      for (const visage of visages) {
+        const alignement = alignerVisage(image, visage.kps, 112);
+        resultat.push({ ...visage, embedding: await this._plonger(alignement) });
+      }
     }
+    const t4 = maintenant();
+    this.dernieresDurees = { lectureMs: t1 - t0, pretraitementMs: t2 - t1, inferenceMs: t3 - t2, embeddingMs: t4 - t3 };
     return resultat;
   }
 
-  async _detecter(image) {
+  async _detecter(entree, echelle) {
     const taille = TAILLE_DETECTION;
-    const { entree, echelle } = entreeDetection(image, taille);
     const tenseur = new globalThis.ort.Tensor("float32", entree, [1, 3, taille, taille]);
     const sortie = await this._detection.run({ [this._detection.inputNames[0]]: tenseur });
     const sorties = this._detection.outputNames.map((nom) => sortie[nom].data);
@@ -106,7 +132,6 @@ export class Analyseur {
   async _plonger(alignement112) {
     const tenseur = new globalThis.ort.Tensor("float32", entreeReconnaissance(alignement112), [1, 3, 112, 112]);
     const sortie = await this._reconnaissance.run({ [this._reconnaissance.inputNames[0]]: tenseur });
-    const brut = sortie[this._reconnaissance.outputNames[0]].data;
-    return normaliser(brut);
+    return normaliser(sortie[this._reconnaissance.outputNames[0]].data);
   }
 }

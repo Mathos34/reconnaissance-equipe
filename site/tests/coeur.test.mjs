@@ -41,6 +41,7 @@ const visage = (embedding, score = 0.9, b = boite(100, 100, 300, 320)) => ({
   kps: GABARIT_ARCFACE.map(([x, y]) => [x * 2 + 100, y * 2 + 100]),
 });
 const BOITE_STD = boite(100, 100, 300, 320);
+const CONSENTEMENT = { date: "2026-10-08T09:30:00", mention: "J'ACCEPTE" };
 
 const FICHE_CLAIRE = {
   identifiant: "C001",
@@ -347,7 +348,7 @@ test("redimensionner : une image uniforme reste uniforme", () => {
   const image = { width: 4, height: 4, data: new Uint8ClampedArray(64).fill(90) };
   const petite = redimensionner(image, 2, 2);
   assert.equal(petite.width, 2);
-  assert.ok(petite.data.every((v) => v === 90));
+  assert.ok(petite.data.every((v, i) => (i % 4 === 3 ? v === 255 : v === 90)), "RGB inchangé, alpha opaque");
 });
 
 // Ordre des sorties SCRFD : tous les scores (3 niveaux), puis toutes les boîtes, puis tous les points.
@@ -436,7 +437,7 @@ test("Base : enregistrer, lister, obtenir, galerie et suppression", () => {
 
 test("Base : export puis import restaurent les données, un fichier invalide ne modifie rien", () => {
   const source = new Base(new StockageMemoire(), "test");
-  source.enregistrer(FICHE_CLAIRE, { gabarit: vecteur(1) });
+  source.enregistrer(FICHE_CLAIRE, { gabarit: vecteur(1), consentement: CONSENTEMENT });
   const sauvegarde = source.exporter();
 
   const cible = new Base(new StockageMemoire(), "test2");
@@ -462,4 +463,36 @@ test("Base : mode remplacer vide la base avant l'import", () => {
   source.enregistrer(FICHE_CLAIRE);
   base.importer(source.exporter(), { mode: "remplacer" });
   assert.deepEqual(base.identifiants(), ["C001"]);
+});
+
+test("Base : un visage sans consentement est refusé, à l'enregistrement comme à l'import", () => {
+  const base = new Base(new StockageMemoire(), "test4");
+  assert.throws(() => base.enregistrer(FICHE_CLAIRE, { gabarit: vecteur(1) }), /consentement/);
+  base.enregistrer(FICHE_CLAIRE, { gabarit: vecteur(1), consentement: CONSENTEMENT });
+  const sauvegarde = JSON.parse(base.exporter());
+  sauvegarde.clients[0].consentement = null;
+  assert.throws(() => new Base(new StockageMemoire(), "t5").importer(JSON.stringify(sauvegarde)), /consentement/);
+});
+
+test("Base : un gabarit nul ou non numérique est refusé à l'import, un gabarit valide est normalisé", () => {
+  const base = new Base(new StockageMemoire(), "test6");
+  base.enregistrer(FICHE_CLAIRE, { gabarit: vecteur(1), consentement: CONSENTEMENT });
+  const sauvegarde = JSON.parse(base.exporter());
+  const cible = () => new Base(new StockageMemoire(), "t7");
+  for (const gabarit of [new Array(512).fill(0), new Array(512).fill("x"), new Array(511).fill(0.1)]) {
+    const copie = structuredClone(sauvegarde);
+    copie.clients[0].gabarit = gabarit;
+    assert.throws(() => cible().importer(JSON.stringify(copie)), /gabarit invalide/);
+  }
+  const echelle = structuredClone(sauvegarde);
+  echelle.clients[0].gabarit = echelle.clients[0].gabarit.map((v) => v * 7);
+  const b = cible();
+  b.importer(JSON.stringify(echelle));
+  assert.ok(Math.abs(Math.hypot(...b.entreesGalerie()[0].gabarit) - 1) < 1e-5);
+});
+
+test("erreursFiche : styles et cadeaux doivent être des listes de textes", () => {
+  assert.ok(erreursFiche({ ...FICHE_CLAIRE, styles: "casual" }).some((e) => e.champ === "styles"));
+  assert.ok(erreursFiche({ ...FICHE_CLAIRE, cadeaux_notes: [1, 2] }).some((e) => e.champ === "cadeaux_notes"));
+  assert.ok(erreursFiche({ ...FICHE_CLAIRE, derniers_achats: "aucun" }).some((e) => e.champ === "derniers_achats"));
 });

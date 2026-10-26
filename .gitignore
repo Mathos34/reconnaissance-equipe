@@ -17,3 +17,6 @@ dist/
 # Site web : dépendances de test (les modèles buffalo_s sont versionnés, voir docs/DECISIONS.md, D-033)
 site/node_modules/
 site/tests/e2e/__pycache__/
+
+# Évaluation : images et vidéos de test régénérables (python evaluation/preparer_donnees.py)
+evaluation/donnees/

@@ -1,0 +1,1156 @@
+{
+  "date": "2026-10-26T12:37:08",
+  "machine": "AMD64 Family 25 Model 80 Stepping 0, AuthenticAMD (Windows 11)",
+  "modele": "buffalo_s (det_500m + w600k_mbf)",
+  "seuil": 0.35,
+  "identites": 6,
+  "methode": "Scène 1280 x 720, visage de 180 px par défaut, gabarit moyen de 5 variantes. Même photo source pour enrôlement et test.",
+  "conditions": {
+    "taille": {
+      "libelle": "Largeur du visage (px, scène 1280 px)",
+      "niveaux": [
+        {
+          "niveau": 220,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.989,
+          "distanceEstimeeM": 0.62
+        },
+        {
+          "niveau": 180,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.998,
+          "distanceEstimeeM": 0.76
+        },
+        {
+          "niveau": 140,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.981,
+          "distanceEstimeeM": 0.98
+        },
+        {
+          "niveau": 100,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.973,
+          "distanceEstimeeM": 1.37
+        },
+        {
+          "niveau": 70,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.962,
+          "distanceEstimeeM": 1.96
+        },
+        {
+          "niveau": 50,
+          "detection": 83.3,
+          "identification": 83.3,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.936,
+          "distanceEstimeeM": 2.74
+        },
+        {
+          "niveau": 35,
+          "detection": 83.3,
+          "identification": 83.3,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.823,
+          "distanceEstimeeM": 3.92
+        },
+        {
+          "niveau": 25,
+          "detection": 33.3,
+          "identification": 33.3,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.817,
+          "distanceEstimeeM": 5.48
+        },
+        {
+          "niveau": 18,
+          "detection": 0.0,
+          "identification": 0.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": null,
+          "distanceEstimeeM": 7.62
+        }
+      ]
+    },
+    "luminosite": {
+      "libelle": "Exposition (facteur)",
+      "niveaux": [
+        {
+          "niveau": 0.04,
+          "detection": 66.7,
+          "identification": 66.7,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.491
+        },
+        {
+          "niveau": 0.07,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.717
+        },
+        {
+          "niveau": 0.1,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.795
+        },
+        {
+          "niveau": 0.15,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.867
+        },
+        {
+          "niveau": 0.25,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.92
+        },
+        {
+          "niveau": 0.5,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.966
+        },
+        {
+          "niveau": 1.0,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.998
+        },
+        {
+          "niveau": 1.8,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.757
+        },
+        {
+          "niveau": 2.4,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.606
+        },
+        {
+          "niveau": 3.5,
+          "detection": 100.0,
+          "identification": 50.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.387
+        },
+        {
+          "niveau": 5.0,
+          "detection": 33.3,
+          "identification": 16.7,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.274
+        }
+      ]
+    },
+    "flou": {
+      "libelle": "Flou (sigma gaussien, px)",
+      "niveaux": [
+        {
+          "niveau": 0,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.998
+        },
+        {
+          "niveau": 2,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.971
+        },
+        {
+          "niveau": 4,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.846
+        },
+        {
+          "niveau": 6,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.67
+        },
+        {
+          "niveau": 8,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.504
+        },
+        {
+          "niveau": 11,
+          "detection": 100.0,
+          "identification": 16.7,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.286
+        },
+        {
+          "niveau": 14,
+          "detection": 83.3,
+          "identification": 0.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.171
+        },
+        {
+          "niveau": 18,
+          "detection": 50.0,
+          "identification": 0.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.078
+        }
+      ]
+    },
+    "rotation": {
+      "libelle": "Inclinaison de la tête (degrés)",
+      "niveaux": [
+        {
+          "niveau": 0,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.998
+        },
+        {
+          "niveau": 10,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.987
+        },
+        {
+          "niveau": 20,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.968
+        },
+        {
+          "niveau": 30,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.953
+        },
+        {
+          "niveau": 45,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.924
+        },
+        {
+          "niveau": 60,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.823
+        },
+        {
+          "niveau": 90,
+          "detection": 83.3,
+          "identification": 50.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.48
+        }
+      ]
+    },
+    "occultation": {
+      "libelle": "Bas du visage masqué (part de la hauteur)",
+      "niveaux": [
+        {
+          "niveau": 0,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.998
+        },
+        {
+          "niveau": 0.2,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.888
+        },
+        {
+          "niveau": 0.35,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.711
+        },
+        {
+          "niveau": 0.5,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.565
+        },
+        {
+          "niveau": 0.65,
+          "detection": 83.3,
+          "identification": 0.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.211
+        }
+      ]
+    },
+    "bruit": {
+      "libelle": "Bruit du capteur (écart type)",
+      "niveaux": [
+        {
+          "niveau": 0,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.998
+        },
+        {
+          "niveau": 20,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.855
+        },
+        {
+          "niveau": 35,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.739
+        },
+        {
+          "niveau": 50,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.636
+        },
+        {
+          "niveau": 70,
+          "detection": 100.0,
+          "identification": 83.3,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.448
+        },
+        {
+          "niveau": 90,
+          "detection": 100.0,
+          "identification": 16.7,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.215
+        },
+        {
+          "niveau": 120,
+          "detection": 50.0,
+          "identification": 0.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.086
+        }
+      ]
+    },
+    "compression": {
+      "libelle": "Qualité JPEG",
+      "niveaux": [
+        {
+          "niveau": 95,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.997
+        },
+        {
+          "niveau": 50,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.985
+        },
+        {
+          "niveau": 25,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.962
+        },
+        {
+          "niveau": 10,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.856
+        },
+        {
+          "niveau": 5,
+          "detection": 100.0,
+          "identification": 100.0,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.699
+        },
+        {
+          "niveau": 2,
+          "detection": 83.3,
+          "identification": 66.7,
+          "faussesAcceptations": 0,
+          "similariteMoyenne": 0.432
+        }
+      ]
+    }
+  },
+  "distributions": {
+    "memePersonne": {
+      "n": 290,
+      "moyenne": 0.76,
+      "min": 0.044,
+      "histogramme": [
+        {
+          "debut": -0.2,
+          "n": 0
+        },
+        {
+          "debut": -0.15,
+          "n": 0
+        },
+        {
+          "debut": -0.1,
+          "n": 0
+        },
+        {
+          "debut": -0.05,
+          "n": 0
+        },
+        {
+          "debut": 0.0,
+          "n": 1
+        },
+        {
+          "debut": 0.05,
+          "n": 7
+        },
+        {
+          "debut": 0.1,
+          "n": 3
+        },
+        {
+          "debut": 0.15,
+          "n": 8
+        },
+        {
+          "debut": 0.2,
+          "n": 5
+        },
+        {
+          "debut": 0.25,
+          "n": 3
+        },
+        {
+          "debut": 0.3,
+          "n": 7
+        },
+        {
+          "debut": 0.35,
+          "n": 6
+        },
+        {
+          "debut": 0.4,
+          "n": 7
+        },
+        {
+          "debut": 0.45,
+          "n": 5
+        },
+        {
+          "debut": 0.5,
+          "n": 8
+        },
+        {
+          "debut": 0.55,
+          "n": 10
+        },
+        {
+          "debut": 0.6,
+          "n": 11
+        },
+        {
+          "debut": 0.65,
+          "n": 11
+        },
+        {
+          "debut": 0.7,
+          "n": 14
+        },
+        {
+          "debut": 0.75,
+          "n": 17
+        },
+        {
+          "debut": 0.8,
+          "n": 12
+        },
+        {
+          "debut": 0.85,
+          "n": 27
+        },
+        {
+          "debut": 0.9,
+          "n": 20
+        },
+        {
+          "debut": 0.95,
+          "n": 108
+        }
+      ]
+    },
+    "imposteurs": {
+      "n": 1450,
+      "moyenne": 0.044,
+      "max": 0.243,
+      "histogramme": [
+        {
+          "debut": -0.2,
+          "n": 1
+        },
+        {
+          "debut": -0.15,
+          "n": 5
+        },
+        {
+          "debut": -0.1,
+          "n": 86
+        },
+        {
+          "debut": -0.05,
+          "n": 315
+        },
+        {
+          "debut": 0.0,
+          "n": 442
+        },
+        {
+          "debut": 0.05,
+          "n": 334
+        },
+        {
+          "debut": 0.1,
+          "n": 99
+        },
+        {
+          "debut": 0.15,
+          "n": 143
+        },
+        {
+          "debut": 0.2,
+          "n": 25
+        },
+        {
+          "debut": 0.25,
+          "n": 0
+        },
+        {
+          "debut": 0.3,
+          "n": 0
+        },
+        {
+          "debut": 0.35,
+          "n": 0
+        },
+        {
+          "debut": 0.4,
+          "n": 0
+        },
+        {
+          "debut": 0.45,
+          "n": 0
+        },
+        {
+          "debut": 0.5,
+          "n": 0
+        },
+        {
+          "debut": 0.55,
+          "n": 0
+        },
+        {
+          "debut": 0.6,
+          "n": 0
+        },
+        {
+          "debut": 0.65,
+          "n": 0
+        },
+        {
+          "debut": 0.7,
+          "n": 0
+        },
+        {
+          "debut": 0.75,
+          "n": 0
+        },
+        {
+          "debut": 0.8,
+          "n": 0
+        },
+        {
+          "debut": 0.85,
+          "n": 0
+        },
+        {
+          "debut": 0.9,
+          "n": 0
+        },
+        {
+          "debut": 0.95,
+          "n": 0
+        }
+      ]
+    }
+  },
+  "courbe": [
+    {
+      "seuil": 0.0,
+      "far": 71.93,
+      "frr": 0.0
+    },
+    {
+      "seuil": 0.01,
+      "far": 64.97,
+      "frr": 0.0
+    },
+    {
+      "seuil": 0.02,
+      "far": 56.21,
+      "frr": 0.0
+    },
+    {
+      "seuil": 0.03,
+      "far": 50.14,
+      "frr": 0.0
+    },
+    {
+      "seuil": 0.04,
+      "far": 45.93,
+      "frr": 0.0
+    },
+    {
+      "seuil": 0.05,
+      "far": 41.45,
+      "frr": 0.34
+    },
+    {
+      "seuil": 0.06,
+      "far": 36.48,
+      "frr": 1.03
+    },
+    {
+      "seuil": 0.07,
+      "far": 30.69,
+      "frr": 1.03
+    },
+    {
+      "seuil": 0.08,
+      "far": 26.76,
+      "frr": 1.38
+    },
+    {
+      "seuil": 0.09,
+      "far": 20.9,
+      "frr": 2.07
+    },
+    {
+      "seuil": 0.1,
+      "far": 18.41,
+      "frr": 2.76
+    },
+    {
+      "seuil": 0.11,
+      "far": 16.62,
+      "frr": 3.1
+    },
+    {
+      "seuil": 0.12,
+      "far": 14.83,
+      "frr": 3.1
+    },
+    {
+      "seuil": 0.13,
+      "far": 13.66,
+      "frr": 3.1
+    },
+    {
+      "seuil": 0.14,
+      "far": 12.76,
+      "frr": 3.45
+    },
+    {
+      "seuil": 0.15,
+      "far": 11.59,
+      "frr": 3.79
+    },
+    {
+      "seuil": 0.16,
+      "far": 10.83,
+      "frr": 4.83
+    },
+    {
+      "seuil": 0.17,
+      "far": 7.93,
+      "frr": 4.83
+    },
+    {
+      "seuil": 0.18,
+      "far": 5.93,
+      "frr": 5.86
+    },
+    {
+      "seuil": 0.19,
+      "far": 3.66,
+      "frr": 6.55
+    },
+    {
+      "seuil": 0.2,
+      "far": 1.72,
+      "frr": 6.55
+    },
+    {
+      "seuil": 0.21,
+      "far": 0.83,
+      "frr": 6.9
+    },
+    {
+      "seuil": 0.22,
+      "far": 0.55,
+      "frr": 7.24
+    },
+    {
+      "seuil": 0.23,
+      "far": 0.14,
+      "frr": 7.24
+    },
+    {
+      "seuil": 0.24,
+      "far": 0.07,
+      "frr": 7.59
+    },
+    {
+      "seuil": 0.25,
+      "far": 0.0,
+      "frr": 8.28
+    },
+    {
+      "seuil": 0.26,
+      "far": 0.0,
+      "frr": 8.28
+    },
+    {
+      "seuil": 0.27,
+      "far": 0.0,
+      "frr": 8.28
+    },
+    {
+      "seuil": 0.28,
+      "far": 0.0,
+      "frr": 8.28
+    },
+    {
+      "seuil": 0.29,
+      "far": 0.0,
+      "frr": 8.28
+    },
+    {
+      "seuil": 0.3,
+      "far": 0.0,
+      "frr": 9.31
+    },
+    {
+      "seuil": 0.31,
+      "far": 0.0,
+      "frr": 9.66
+    },
+    {
+      "seuil": 0.32,
+      "far": 0.0,
+      "frr": 10.0
+    },
+    {
+      "seuil": 0.33,
+      "far": 0.0,
+      "frr": 10.69
+    },
+    {
+      "seuil": 0.34,
+      "far": 0.0,
+      "frr": 11.03
+    },
+    {
+      "seuil": 0.35,
+      "far": 0.0,
+      "frr": 11.72
+    },
+    {
+      "seuil": 0.36,
+      "far": 0.0,
+      "frr": 11.72
+    },
+    {
+      "seuil": 0.37,
+      "far": 0.0,
+      "frr": 12.07
+    },
+    {
+      "seuil": 0.38,
+      "far": 0.0,
+      "frr": 12.76
+    },
+    {
+      "seuil": 0.39,
+      "far": 0.0,
+      "frr": 13.1
+    },
+    {
+      "seuil": 0.4,
+      "far": 0.0,
+      "frr": 13.79
+    },
+    {
+      "seuil": 0.41,
+      "far": 0.0,
+      "frr": 14.83
+    },
+    {
+      "seuil": 0.42,
+      "far": 0.0,
+      "frr": 14.83
+    },
+    {
+      "seuil": 0.43,
+      "far": 0.0,
+      "frr": 15.52
+    },
+    {
+      "seuil": 0.44,
+      "far": 0.0,
+      "frr": 15.86
+    },
+    {
+      "seuil": 0.45,
+      "far": 0.0,
+      "frr": 16.21
+    },
+    {
+      "seuil": 0.46,
+      "far": 0.0,
+      "frr": 16.9
+    },
+    {
+      "seuil": 0.47,
+      "far": 0.0,
+      "frr": 16.9
+    },
+    {
+      "seuil": 0.48,
+      "far": 0.0,
+      "frr": 16.9
+    },
+    {
+      "seuil": 0.49,
+      "far": 0.0,
+      "frr": 16.9
+    },
+    {
+      "seuil": 0.5,
+      "far": 0.0,
+      "frr": 17.93
+    },
+    {
+      "seuil": 0.51,
+      "far": 0.0,
+      "frr": 18.62
+    },
+    {
+      "seuil": 0.52,
+      "far": 0.0,
+      "frr": 18.97
+    },
+    {
+      "seuil": 0.53,
+      "far": 0.0,
+      "frr": 19.31
+    },
+    {
+      "seuil": 0.54,
+      "far": 0.0,
+      "frr": 19.66
+    },
+    {
+      "seuil": 0.55,
+      "far": 0.0,
+      "frr": 20.69
+    },
+    {
+      "seuil": 0.56,
+      "far": 0.0,
+      "frr": 21.72
+    },
+    {
+      "seuil": 0.57,
+      "far": 0.0,
+      "frr": 21.72
+    },
+    {
+      "seuil": 0.58,
+      "far": 0.0,
+      "frr": 23.79
+    },
+    {
+      "seuil": 0.59,
+      "far": 0.0,
+      "frr": 24.14
+    },
+    {
+      "seuil": 0.6,
+      "far": 0.0,
+      "frr": 24.14
+    },
+    {
+      "seuil": 0.61,
+      "far": 0.0,
+      "frr": 25.17
+    },
+    {
+      "seuil": 0.62,
+      "far": 0.0,
+      "frr": 26.21
+    },
+    {
+      "seuil": 0.63,
+      "far": 0.0,
+      "frr": 26.21
+    },
+    {
+      "seuil": 0.64,
+      "far": 0.0,
+      "frr": 27.59
+    },
+    {
+      "seuil": 0.65,
+      "far": 0.0,
+      "frr": 27.93
+    },
+    {
+      "seuil": 0.66,
+      "far": 0.0,
+      "frr": 28.62
+    },
+    {
+      "seuil": 0.67,
+      "far": 0.0,
+      "frr": 28.97
+    },
+    {
+      "seuil": 0.68,
+      "far": 0.0,
+      "frr": 30.0
+    },
+    {
+      "seuil": 0.69,
+      "far": 0.0,
+      "frr": 30.69
+    },
+    {
+      "seuil": 0.7,
+      "far": 0.0,
+      "frr": 31.72
+    },
+    {
+      "seuil": 0.71,
+      "far": 0.0,
+      "frr": 32.76
+    },
+    {
+      "seuil": 0.72,
+      "far": 0.0,
+      "frr": 33.79
+    },
+    {
+      "seuil": 0.73,
+      "far": 0.0,
+      "frr": 35.17
+    },
+    {
+      "seuil": 0.74,
+      "far": 0.0,
+      "frr": 35.86
+    },
+    {
+      "seuil": 0.75,
+      "far": 0.0,
+      "frr": 36.55
+    },
+    {
+      "seuil": 0.76,
+      "far": 0.0,
+      "frr": 37.93
+    },
+    {
+      "seuil": 0.77,
+      "far": 0.0,
+      "frr": 40.0
+    },
+    {
+      "seuil": 0.78,
+      "far": 0.0,
+      "frr": 41.38
+    },
+    {
+      "seuil": 0.79,
+      "far": 0.0,
+      "frr": 41.72
+    },
+    {
+      "seuil": 0.8,
+      "far": 0.0,
+      "frr": 42.41
+    },
+    {
+      "seuil": 0.81,
+      "far": 0.0,
+      "frr": 42.41
+    },
+    {
+      "seuil": 0.82,
+      "far": 0.0,
+      "frr": 43.1
+    },
+    {
+      "seuil": 0.83,
+      "far": 0.0,
+      "frr": 44.48
+    },
+    {
+      "seuil": 0.84,
+      "far": 0.0,
+      "frr": 45.86
+    },
+    {
+      "seuil": 0.85,
+      "far": 0.0,
+      "frr": 46.55
+    },
+    {
+      "seuil": 0.86,
+      "far": 0.0,
+      "frr": 48.28
+    },
+    {
+      "seuil": 0.87,
+      "far": 0.0,
+      "frr": 50.0
+    },
+    {
+      "seuil": 0.88,
+      "far": 0.0,
+      "frr": 52.07
+    },
+    {
+      "seuil": 0.89,
+      "far": 0.0,
+      "frr": 54.48
+    },
+    {
+      "seuil": 0.9,
+      "far": 0.0,
+      "frr": 55.86
+    },
+    {
+      "seuil": 0.91,
+      "far": 0.0,
+      "frr": 56.21
+    },
+    {
+      "seuil": 0.92,
+      "far": 0.0,
+      "frr": 56.9
+    },
+    {
+      "seuil": 0.93,
+      "far": 0.0,
+      "frr": 58.62
+    },
+    {
+      "seuil": 0.94,
+      "far": 0.0,
+      "frr": 60.69
+    },
+    {
+      "seuil": 0.95,
+      "far": 0.0,
+      "frr": 62.76
+    },
+    {
+      "seuil": 0.96,
+      "far": 0.0,
+      "frr": 65.17
+    },
+    {
+      "seuil": 0.97,
+      "far": 0.0,
+      "frr": 69.66
+    },
+    {
+      "seuil": 0.98,
+      "far": 0.0,
+      "frr": 76.21
+    },
+    {
+      "seuil": 0.99,
+      "far": 0.0,
+      "frr": 83.1
+    },
+    {
+      "seuil": 1.0,
+      "far": 0.0,
+      "frr": 100.0
+    }
+  ],
+  "auSeuil": {
+    "seuil": 0.35,
+    "far": 0.0,
+    "frr": 11.72
+  },
+  "tauxEgalErreur": {
+    "seuil": 0.18,
+    "far": 5.93,
+    "frr": 5.86
+  },
+  "performancePython": {
+    "p50Ms": 19.9,
+    "p95Ms": 26.4,
+    "iterations": 40
+  },
+  "dureeEvaluationS": 17.5
+}

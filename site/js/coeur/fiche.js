@@ -41,7 +41,17 @@ export function erreursFiche(fiche) {
   if (!sucreValide) ajouter("sucre", "Sucre : « non » ou un nombre de morceaux");
   if (!estTexteNonVide(p.lait)) ajouter("lait", "Indiquez le lait");
 
-  for (const achat of fiche.derniers_achats || []) {
+  for (const champ of ["styles", "cadeaux_notes"]) {
+    const valeur = fiche[champ];
+    if (valeur !== undefined && !(Array.isArray(valeur) && valeur.every((v) => typeof v === "string"))) {
+      ajouter(champ, `${champ === "styles" ? "Styles" : "Cadeaux notés"} : une liste de textes`);
+    }
+  }
+  if (fiche.derniers_achats !== undefined && !Array.isArray(fiche.derniers_achats)) {
+    ajouter("derniers_achats", "Derniers achats : une liste");
+  }
+
+  for (const achat of Array.isArray(fiche.derniers_achats) ? fiche.derniers_achats : []) {
     if (!MOTIF_DATE.test(achat.date || "") || Number.isNaN(Date.parse(achat.date))) {
       ajouter("derniers_achats", "Achat : date au format AAAA-MM-JJ");
       break;

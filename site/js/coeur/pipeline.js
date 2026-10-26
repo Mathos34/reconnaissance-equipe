@@ -15,7 +15,13 @@ export class Pipeline {
     this._suiveur = suiveur;
     this._lisseur = lisseur;
     this._scores = new Map();
+    this._derniersResultats = [];
     this._compteur = 0;
+  }
+
+  /** Résultats bruts (avant lissage) de la dernière détection : [{piste, identifiant, score}]. Pour les indicateurs. */
+  derniersResultats() {
+    return this._derniersResultats.map((r) => ({ ...r }));
   }
 
   changerGalerie(galerie) {
@@ -51,10 +57,12 @@ export class Pipeline {
         this._scores.delete(disparue);
       }
     }
+    this._derniersResultats = [];
     for (const { piste, index } of associations) {
       const resultat = this._galerie.reconnaitre(visages[index].embedding, this._seuil);
       this._lisseur.ajouter(piste.identifiant, resultat.identifiant);
       this._scores.set(piste.identifiant, resultat.score);
+      this._derniersResultats.push({ piste: piste.identifiant, identifiant: resultat.identifiant, score: resultat.score });
     }
   }
 
